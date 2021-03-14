@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/caibanThinh200/food-app-rebuild.git/static/css/main.81a67e18.chunk.css",
+    "main.js": "/caibanThinh200/food-app-rebuild.git/static/js/main.9c6f1af3.chunk.js",
+    "main.js.map": "/caibanThinh200/food-app-rebuild.git/static/js/main.9c6f1af3.chunk.js.map",
+    "runtime-main.js": "/caibanThinh200/food-app-rebuild.git/static/js/runtime-main.e7ac007e.js",
+    "runtime-main.js.map": "/caibanThinh200/food-app-rebuild.git/static/js/runtime-main.e7ac007e.js.map",
+    "static/css/2.b72b1a0e.chunk.css": "/caibanThinh200/food-app-rebuild.git/static/css/2.b72b1a0e.chunk.css",
+    "static/js/2.4ebe1bd1.chunk.js": "/caibanThinh200/food-app-rebuild.git/static/js/2.4ebe1bd1.chunk.js",
+    "static/js/2.4ebe1bd1.chunk.js.map": "/caibanThinh200/food-app-rebuild.git/static/js/2.4ebe1bd1.chunk.js.map",
+    "static/js/3.6e00b9c5.chunk.js": "/caibanThinh200/food-app-rebuild.git/static/js/3.6e00b9c5.chunk.js",
+    "static/js/3.6e00b9c5.chunk.js.map": "/caibanThinh200/food-app-rebuild.git/static/js/3.6e00b9c5.chunk.js.map",
+    "index.html": "/caibanThinh200/food-app-rebuild.git/index.html",
+    "static/css/2.b72b1a0e.chunk.css.map": "/caibanThinh200/food-app-rebuild.git/static/css/2.b72b1a0e.chunk.css.map",
+    "static/css/main.81a67e18.chunk.css.map": "/caibanThinh200/food-app-rebuild.git/static/css/main.81a67e18.chunk.css.map",
+    "static/js/2.4ebe1bd1.chunk.js.LICENSE.txt": "/caibanThinh200/food-app-rebuild.git/static/js/2.4ebe1bd1.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/caibanThinh200/food-app-rebuild.git/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e7ac007e.js",
+    "static/css/2.b72b1a0e.chunk.css",
+    "static/js/2.4ebe1bd1.chunk.js",
+    "static/css/main.81a67e18.chunk.css",
+    "static/js/main.9c6f1af3.chunk.js"
+  ]
+}
