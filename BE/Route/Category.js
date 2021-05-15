@@ -11,7 +11,9 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage:storage});
 const CategoryController = require("../Controller/CategoryController");
+
 route.post("/",upload.single("icon"),CategoryController.addCategoryController);
 route.get("/",CategoryController.showCategoryController);
 route.get("/:id",CategoryController.showCategoryByIdController);
+
 module.exports = route;
