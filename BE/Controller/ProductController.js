@@ -52,8 +52,8 @@ class ProductController {
   }
   static async showFoodController(req, res, next) {
     try {
-      let data = await ProductService.showFoodService(req);
-      res.status(200).json(data);
+      let dataObj = await ProductService.showFoodService(req);
+      res.status(200).json(dataObj);
     } catch (e) {
       res.status(200).json({
         status: "FAILED",
