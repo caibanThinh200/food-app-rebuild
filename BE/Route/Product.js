@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage:storage});
+
 route.post("/",upload.single("image"),ProductController.createProductController);
 route.get("/",ProductController.showFoodController);
 route.get("/idFood/:idFood",ProductController.showFoodByIdController);
@@ -20,4 +21,5 @@ route.post("/images",upload.single("image"),ProductController.postImageOfProduct
 route.get("/images/:id",ProductController.getImagesOfProductController);
 route.put("/submit",ProductController.increaseProductController);
 route.get("/b/bestSaled",ProductController.getProductBestSaledController);
+
 module.exports = route;

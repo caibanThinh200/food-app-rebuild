@@ -1,0 +1,25 @@
+.admin{
+    width: 100%;
+}
+
+.admin-component{
+    width: 100%;
+    min-height: 100vh;
+}
+.admin-component .compo{
+    width: 100%;
+    margin-top: 50px;
+}
+.menu-admin{
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 1px 15px 25px rgba(0, 0 ,0, 0.1);
+    width: 100%;
+}
+.menu-admin h4{
+    margin-bottom: 0;
+    color: orange;
+}
+.admin .col-3, .admin .col-9{
+    padding: 0;
+}

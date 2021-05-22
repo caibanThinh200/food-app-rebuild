@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Register from "./Register";
 import SlideRoutes from "react-slide-routes";
 import Login from "./Login";
-
+import '../App.css'
 import HomeHeader from "./HomeHeader"
 import  ProductList  from "./ProductList";
 import {
@@ -19,17 +19,24 @@ import About from "./Service";
 import Profile from "./Profile";
 import ListBill from "./ListBill";
 import BillDetail from "./BillDetail";
-
+import Header from "./Header"
+import Admin from "./admin/admin";
+import Products from "./admin/product-list";
 
 
 function Section(props){
 
     
     return(
-      
             <Switch>
-            
-             
+                <Route exact path="/admin">
+                    <Admin com={<Products/>}/>
+                </Route>
+                <Route exact path="/admin/add">
+                    <Admin />
+                </Route>
+                <div>
+                <Header/>
                 <Route exact path = "/">
                   <HomeHeader />
                  
@@ -59,12 +66,10 @@ function Section(props){
                   <div className="clear-both footer-stick"></div>
                   <Contact/>
                 </Route>
-           
+
                 <Route path="/login">
                   <Login/>
                 </Route>
-               
-               
                 <Route path="/profile/:id" exact>
                   <Profile/>
                 </Route>
@@ -78,6 +83,8 @@ function Section(props){
                  <div className="clear-both footer-stick"></div>
                  <Contact/>
                </Route>
+                </div>
+                
             </Switch>
       )
 } 

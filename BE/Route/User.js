@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage:storage});
+
 const UserController = require("../Controller/UserController");
 route.get("/",UserController.getListUserController);
 route.post("/",UserController.createUserController);
@@ -17,4 +18,5 @@ route.post("/login",UserController.loginController);
 route.get("/:id",UserController.getUserInfoByParamController);
 route.get("/s/userprofile",UserController.getUserInfoController);
 route.put("/profile/:id",upload.single("file"),UserController.changeAvatarController);
+
 module.exports = route;

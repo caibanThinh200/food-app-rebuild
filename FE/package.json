@@ -19,6 +19,7 @@
     "react-scripts": "4.0.1",
     "react-slide-routes": "^0.14.0",
     "simple-react-validator": "^1.6.0",
+    "swiper": "^6.6.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
