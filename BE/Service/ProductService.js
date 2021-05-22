@@ -54,8 +54,15 @@ class ProductService {
       let data = await querryBuilder("product")
         .orderBy("created_at", "desc")
         .select();
+      const parseData = JSON.parse(JSON.stringify(data));
+      const categories = parseData.map(async item => {
+        const category = await querryBuilder("category").where("idCategory", item.idCategory).first();
+        const parseCate = JSON.parse(JSON.stringify(category));
+        return { ...item, cateName: parseCate.nameCategory }
+      })
+      const catePromise = await Promise.all(categories);
 
-      return data;
+      return catePromise;
     } catch (e) {
       console.log(e);
     }
@@ -63,8 +70,6 @@ class ProductService {
   static async searchFoodService(req, res, next) {
     try {
       let data1 = req.query.search;
-      console.log(data1);
-
       let data = await querryBuilder("product")
         .where("nameFood", "like", data1 + "%")
         .select();
