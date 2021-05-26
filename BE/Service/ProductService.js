@@ -147,5 +147,26 @@ class ProductService {
       console.log(e);
     }
   }
+  static async UpdateProductService(req,res,next) {
+    try{
+      const { id } = req.params;
+      let data = req.body;
+      console.log(req.file);
+      const filename = req.file.filename ? req.file.filename : ""; 
+      const oldFood = await querryBuilder("product").where("idProduct",id).select().first();
+      let updateData = {
+        idCategory: data.idCate ? data.idCate : oldFood.idCate,
+        nameFood: data.nameFood ? data.nameFood : oldFood.idCate,
+        price: data.price ? data.price : oldFood.price,
+        foodAddress: data.address ? data.address : oldFood.price,
+        image: filename ? filename : oldFood.image,
+        updated_at: new Date(),
+      };
+      await querryBuilder("product").where("idProduct",id).update(updateData);
+      return "Update food success";
+    }catch(e) {
+      console.log(e);
+    }
+  }
 }
 module.exports = ProductService;

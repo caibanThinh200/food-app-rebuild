@@ -176,5 +176,25 @@ class ProductController {
       });
     }
   }
+  static async updateProductController(req,res,next) {
+    try{
+      let result = await ProductService.UpdateProductService(req);
+      res.status(200).json({
+        status: "SUCCESS",
+        error: null,
+        result
+      });
+    }catch(e) {
+      console.log(e);
+      res.status(200).json({
+        status: "FAILED",
+        error: {
+          code: 1000,
+          message: "Update product failed" + e,
+        },
+        data: null,
+      });
+    }
+  }
 }
 module.exports = ProductController;

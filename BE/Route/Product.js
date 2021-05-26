@@ -21,5 +21,6 @@ route.post("/images",upload.single("image"),ProductController.postImageOfProduct
 route.get("/images/:id",ProductController.getImagesOfProductController);
 route.put("/submit",ProductController.increaseProductController);
 route.get("/b/bestSaled",ProductController.getProductBestSaledController);
+route.put("/:id",upload.single("image"),ProductController.updateProductController)
 
 module.exports = route;
