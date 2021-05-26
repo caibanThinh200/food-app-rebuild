@@ -8,7 +8,9 @@
 }
 .admin-component .compo{
     width: 100%;
-    margin-top: 50px;
+    min-height: 100vh;
+    padding-top: 30px;
+    background-color: #eee;
 }
 .menu-admin{
     background-color: white;
@@ -22,4 +24,89 @@
 }
 .admin .col-3, .admin .col-9{
     padding: 0;
+}
+
+.ant-table-wrapper{
+    width: 100%;
+}
+.admin .btn-detail{
+    margin-right: 12px;
+    border-style: none;
+    border-radius: 3px;
+    color: orange;
+    width: 70px;
+    border: 1px solid orange;
+    height: 35px;
+    background-color: white;
+}
+.admin .btn-edit{
+    border-style: none;
+    border-radius: 3px;
+    width: 70px;
+    height: 35px;
+    color: white;
+    background-color: yellowgreen;
+}
+.list-food{
+    width: 100%;
+}
+.admin button:active{
+    opacity: 0.7;
+}
+.admin-detail-image{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.ant-modal-body{
+    padding: 17px 5px;
+}
+#detail-price, #detail-address{
+    margin-bottom: 0;
+    font-size: 20px;
+}
+
+#detail-cate{
+    margin: 7px 0;
+    padding: 5px 13px;
+    font-size: 16px;
+}
+.product-detail{
+    padding: 0 30px;
+}
+.product-detail h3{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+.detail-description{
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+.detail-description h6{
+    font-size: 1.5rem;
+}
+.detail-description p{
+    color: gray;
+}
+.admin .btn-add-product{
+    border-style: none;
+    color: white;
+    height: 35px;
+    width: 150px;
+    border-radius: 4px;
+    font-size: 17px;
+}
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before{
+    display: none;
+  }
+  .form-item-1 h5{
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+  }
+
+.ant-menu.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color: #f6f6f6;
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color: black;
 }

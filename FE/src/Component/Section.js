@@ -22,6 +22,7 @@ import BillDetail from "./BillDetail";
 import Header from "./Header"
 import Admin from "./admin/admin";
 import Products from "./admin/product-list";
+import AddProduct from "./admin/add-product";
 
 
 function Section(props){
@@ -32,8 +33,8 @@ function Section(props){
                 <Route exact path="/admin">
                     <Admin com={<Products/>}/>
                 </Route>
-                <Route exact path="/admin/add">
-                    <Admin />
+                <Route exact path="/admin/add-product">
+                    <Admin com={<AddProduct/>}/>
                 </Route>
                 <div>
                 <Header/>

@@ -1,6 +1,21 @@
 html{
   min-height: 100vh;
 }
+
+button{
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+button:active{
+  outline: none;
+  border: none;
+  opacity: 0.5;
+}
+  
+button:focus{
+  outline:0;
+}
 body{
 
  scroll-behavior: smooth;

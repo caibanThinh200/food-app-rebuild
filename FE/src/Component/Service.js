@@ -13,7 +13,7 @@ function About(props) {
         <h1>Our service</h1>
       </div>
 
-      <div className="featurette-row">
+      <div className="featurette-row container">
         <div className="row heading-row ">
           <div className="card-container col-md-4">
             <div className="card-box ">
