@@ -1,5 +1,5 @@
 import { Menu, Switch } from 'antd';
-import { HomeOutlined, SettingOutlined, FileDoneOutlined, LockOutlined, ContainerOutlined, PlusOutlined } from '@ant-design/icons';
+import { HomeOutlined, SettingOutlined, FileDoneOutlined, LockOutlined, ContainerOutlined, PlusOutlined, BarChartOutlined, UserOutlined } from '@ant-design/icons';
 import '../../style/admin.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ const Admin = ({com}) => {
                     <Menu
                         style={{ minHeight:'100vh', width:'20%'}}
                         defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                        defaultOpenKeys={['sub1', 'sub2']}
                         mode="inline"
                         theme={theme}
                     >
@@ -30,9 +30,10 @@ const Admin = ({com}) => {
                             <Menu.Item icon={<PlusOutlined />} key="2"> <Link to="/admin/add-product">Add new food</Link></Menu.Item>
                             <Menu.Item icon={<PlusOutlined />} key="3">Add new category</Menu.Item>
                         </SubMenu>
+                        <Menu.Item icon={<UserOutlined/>}>User Management</Menu.Item>
                         <SubMenu key="sub2" icon={<FileDoneOutlined />} title="Orders">
                             <Menu.Item icon={<ContainerOutlined />} key="5">List orders</Menu.Item>
-                            <Menu.Item key="6">Option 6</Menu.Item>
+                            <Menu.Item icon={<BarChartOutlined/>} key="6">Nghia chau</Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub4" icon={<SettingOutlined />} title="Setting">
                             <Menu.Item key="10"> 

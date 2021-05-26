@@ -42,6 +42,7 @@ const Products = () => {
                             <h3>{detail.nameFood} <i class="fal fa-utensils-alt"></i></h3>
                             <p id="detail-price"> Price: <b><span className="text-danger">{detail.price} VND</span></b></p>
                             <Tag id="detail-cate" color="#d4b106"> {detail.cateName} </Tag>
+                            <h6> Saled: {detail.saled || 0} </h6>
                             <p id="detail-address"><i class="fal fa-map-marker-alt"></i>  Address: {detail.foodAddress} </p>
                         </div>
                         <div className="col-12">

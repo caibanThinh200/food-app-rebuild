@@ -9,7 +9,9 @@ import { reduce } from "lodash";
 
 export const context = React.createContext();
 export const ContextProvider = (props) => {
-  const API_URL = "http://localhost:3010";
+  // const API_URL = "http://localhost:3010";
+  const API_URL = "http://108.160.134.9:3010";
+
   const [isLoading, setIsLoading] = useState(true);
   //Register
 
