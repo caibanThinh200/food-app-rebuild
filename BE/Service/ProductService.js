@@ -15,6 +15,7 @@ class ProductService {
         price: data.price,
         foodAddress: data.address,
         image: req.file.filename,
+        description: data.description,
         created_at: new Date(),
       };
       await querryBuilder("product").insert(insertData);
@@ -160,6 +161,7 @@ class ProductService {
         price: data.price ? data.price : oldFood.price,
         foodAddress: data.address ? data.address : oldFood.price,
         image: filename ? filename : oldFood.image,
+        description: data.description ? description : oldFood.description,
         updated_at: new Date(),
       };
       await querryBuilder("product").where("idProduct",id).update(updateData);
