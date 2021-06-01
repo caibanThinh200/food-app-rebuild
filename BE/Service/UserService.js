@@ -45,6 +45,7 @@ class UserService {
         Birth: data.Birth,
         Gmail: data.Gmail,
         phoneNum: data.PhoneNum,
+        role: data.role,
         Created_at: new Date(),
       };
 
@@ -79,6 +80,7 @@ class UserService {
               address: user.UserAddress,
               birth: user.Birth,
               gmail: user.Gmail,
+              role: user.role
             },
             JWT_SECRET_KEY,
             { expiresIn: 60 * 60 * 8 }
