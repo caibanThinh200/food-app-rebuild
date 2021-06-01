@@ -72,7 +72,7 @@ function Cart(props) {
   };
   const handleOK = () => {
     if (cart.length > 0) {
-      axios.put(API_URL + "/Home/submit", cart).then((res) => console.log(res));
+      axios.put("http://localhost:3010" + "/Home/submit", cart).then((res) => console.log(res));
       const billInsert = {
         cart: cart,
         user: decodedToken.id,
@@ -120,7 +120,7 @@ function Cart(props) {
               ) => (
                 <div key={idProduct} className="cart-box">
                   <div className="cart-image floatLeft">
-                    <img src={"http://localhost:3010/images/" + image} />
+                    <img src={API_URL + "/images/" + image} />
                   </div>
                   <div
                     style={{ marginLeft: "20px" }}

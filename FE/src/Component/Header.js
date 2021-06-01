@@ -133,6 +133,11 @@ function Header(props) {
       <Link className="link" to="/contact">
         Contact
       </Link>
+      {
+        !isExpired && decodedToken && decodedToken.role === "admin" && <Link className="link" to="/admin" replace>
+            Admin
+        </Link>
+      }
 
       {!isExpired ? (
         <span style={{ marginLeft: "35%", width: "100px" }}>

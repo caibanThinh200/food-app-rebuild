@@ -55,7 +55,7 @@ const Detail = (props) => {
             <div className="left-column">
               <img
                 className="main-img"
-                src={"http://localhost:3010/images/" + image}
+                src={API_URL + "/images/" + image}
                 alt=""
               />
               <div className="product-list-image">
@@ -63,7 +63,7 @@ const Detail = (props) => {
                   images.map(({ id, image }) => (
                     <img
                       key={id}
-                      src={"http://localhost:3010/images/" + image}
+                      src={API_URL + "/images/" + image}
                     />
                   ))}
               </div>

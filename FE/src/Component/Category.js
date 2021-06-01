@@ -6,7 +6,7 @@ import "swiper/swiper.min.css";
 
 
 function Category(props) {
-  const { cate, getCate, isLoading, setIsLoading, getProductByCateId } =
+  const { cate, getCate, isLoading, setIsLoading, getProductByCateId, API_URL } =
     useContext(context);
   useEffect(() => {
     getCate();
@@ -61,7 +61,7 @@ function Category(props) {
               >
                 <img
                   className="logo"
-                  src={"http://localhost:3010/images/" + value.icon}
+                  src={ API_URL + "/images/" + value.icon}
                 />
                 <br />
                 <p>{value.nameCategory}</p>
