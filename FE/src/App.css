@@ -24,7 +24,7 @@ th{
   text-align:center
 }
 .site-page-header-ghost-wrapper {
-  padding: 24px;
+  padding: 15px;
   background-color: #f5f5f5;
   width: 80%;
   margin-left: 10%;
@@ -505,9 +505,10 @@ th{
 }
 .product-list{
   width: auto;
-  padding-top: 50px;
+  padding-top: 0px;
   margin: 20px;
   text-align: left;
+  margin-top: 0;
 }
 .product-list .col-md-3{
  padding: 10px;
@@ -729,21 +730,100 @@ th{
   background-color: rgb(58, 57, 57);
   color: white;
 }
+
 .container-contact h6{
   color: white;
 }
+
 .container-contact h3{
-  color: silver;
+  color: white;
+  margin-bottom: 30px;
+  position: relative;
+}
+.container-contact h3::before{
+  position: absolute;
+  content: '';
+  height: 2px;
+  width: 30px;
+  bottom: -10px;
+  background-color: orange;
+}
+.contact-top{
+  background-color: #f6f6f6;
+  padding: 20px 10px;
+}
+
+.subcribe-us{
+  width: 100%;
+  padding: 0;
+  margin: 15px 0;
+}
+.subcribe-us input:focus{
+  outline: none;
+  border-radius: 0;
+  border: 1px solid silver;
+}
+.subcribe-us input{
+  height: 45px;
+  padding-left: 20px;
+  width: 80%;
+  border: 1px solid silver;
+}
+.subcribe-us button{
+  border-style: none;
+  height: 45px;
+  width: 20%;
+  background-color: #ffc107;
+  color: white;
 }
 .container-contact{
   width: 100%;
   padding: 50px;
-  background-color: rgb(138, 133, 133);
+  padding-bottom: 20px;
   background-color: #232425;
   color: black;
 }
+.container-contact .d-flex{
+  margin-bottom: 5px;
+}
+.container-contact #logo{
+  color: white;
+  font-weight: bold;
+  color: #ffc107;
+}
 .container-contact div{
   color: white;
+}
+.container-contact .divide{
+  height: 1px ;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.footer-icon{
+  background-color: #fff;
+  color: black;
+  width: 33px;
+  height: 33px;
+  margin: 3px;
+  border-radius: 3px;
+}
+.footer-icon i{
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #3b5999;
+}
+.footer-icon:nth-child(2) i{
+  background-color: #55acee;
+}
+.footer-icon:nth-child(3) i{
+  background-color: #cd201f;
 }
 .border-hover:hover{
  
@@ -800,31 +880,21 @@ th{
   border-top:solid 1px rgb(177, 172, 172);
 }
 .cart-box{
-  overflow-wrap: break-word;
   margin-bottom: 30px;
-  padding: 30px 50px;
-  width: 100% auto;
-  height: 400px ;
-  border-bottom:solid 1px rgb(177, 172, 172);
-  
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
+  width: 100% ;
+  border: 1px solid #eee;
 }
 
 .cart-image{
-  
-  width: 40%;
-  height: 90% ;
+  width: 100%;
+  height: 100% ;
 }
 .cart-image img{
   width: 100%;
   height: 100%;
 }
 .product-cart{
-  width: 40%;
+  width: 100%;
   height: 100%;
 }
 .total{
@@ -840,22 +910,29 @@ th{
 
 }
 .quantity{
-  width: 40px;
   margin-top: 10px;
-  
+}
+.quantity input, .quantity input:focus{
+  width: 50px;
+  border: 1px solid silver;
+  border-style: none;
+  outline: none;
+  font-size: 18px;
+  padding-left: 20px;
 }
 .quantity button{
-  width: 30px;
-  height: 30px;
-  background-color: black;
-  color: white;
-  border: black 1px solid;
+  width: 40px;
+  height: 40px;
+  color: black;
+  border:  1px solid silver;
+  border-radius: 40px;
+  background-color: white;
 }
 
 .submit-cart{
   border-radius: 10px;
   margin-top: 90px ;
-  height: 80px;
+  height: 60px;
   width: 100%;
   font-size: 25px;
   background-color:#ffc107;
@@ -869,10 +946,9 @@ th{
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  color: white;
 }
-.submit-cart:hover{
-  color: brown;
-}
+
 .modal{
   margin-top: 200px;
 }

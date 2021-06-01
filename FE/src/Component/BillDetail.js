@@ -25,16 +25,18 @@ const BillDetail = (props) => {
   return (
     <div>
       <section className="jumbotron text-center">
-        <h6
+        {/* <h6
           onClick={() => {
             window.history.back();
           }}
           style={{ float: "left" }}
         >
           Back
-        </h6>
+        </h6> */}
         <div className="container">
-          <h1 className="jumbotron-heading voucher">Uber Bill</h1>
+          <div className="voucher">
+          <h1 className="jumbotron-heading">Uber Bill</h1>
+          </div>
         </div>
       </section>
       <div className="container mb-4">
@@ -75,7 +77,7 @@ const BillDetail = (props) => {
                         defaultValue={count}
                       />
                     </td>
-                    <td className="text-right"> {price}$</td>
+                    <td className="text-right"> {new Intl.NumberFormat().format(price)} VND</td>
                   </tr>
                 ))
               ) : (

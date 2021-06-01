@@ -95,7 +95,7 @@ const Detail = (props) => {
               </div>
               {/* Product Pricing */}
               <div className="product-price">
-                <span>{price}$</span>
+                <span>{new Intl.NumberFormat().format(price)} VND</span>
                 <a
                   href="#"
                   onClick={() => {

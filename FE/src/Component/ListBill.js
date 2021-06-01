@@ -40,12 +40,12 @@ const ListBill = (props) => {
   }, [JSON.stringify(userId)]);
 
   return (
-    <div>
+    <div style={{marginBottom:'50px'}}>
       <div
-        style={{ marginTop: "50px", marginBottom: "100px" }}
+        style={{ marginTop: "50px", marginBottom: "50px" }}
         className="voucher"
       >
-        <h1>Payment history</h1>
+        <h1 style={{textAlign:'center'}}>Payment history</h1>
       </div>
       {bill !== undefined ? (
         bill.map(({ idBill, created_at, note, total }) => (

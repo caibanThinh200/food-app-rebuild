@@ -102,115 +102,121 @@ function Cart(props) {
     <div className="cart-container">
       <div className="cart-header textAlignCenter">
         <div className="voucher">
-        <h1>Your cart</h1>
+          <h1>Your cart</h1>
         </div>
       </div>
 
       <div className="cart-content container">
         <div className="row">
-        <div className="col-md-8">
-          <h1>Product</h1>
-          {cart.length <= 0 && (
-            <div>
-              <h2>No product in yout cart</h2>
-            </div>
-          )}
-          {cart.length > 0 &&
-            cart.map(
-              (
-                { idProduct, image, nameFood, price, foodAdress, count },
-                key
-              ) => (
-                <div key={idProduct} className="cart-box">
-                  <div className="cart-image floatLeft">
-                    <img src={"http://localhost:3010/images/" + image} />
-                  </div>
-                  <div
-                    style={{ marginLeft: "20px" }}
-                    className="product-cart floatLeft "
-                  >
-                    <h2>{nameFood}</h2>
-                    <h3>{foodAdress}</h3>
-                    <h3>{price}$</h3>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => removeProduct(idProduct, nameFood)}
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                    >
-                      Remove product
-                    </button>
-                    <div className="quantity textAlignRight  flexBox">
-                      <button
-                        onClick={() => increaseProduct(idProduct)}
-                        className="quantity increase"
-                      >
-                        +
-                      </button>
-                      <input className="quantity" value={count} />
-                      <button
-                        onClick={() => reduceProduct(idProduct)}
-                        className="quantity decrease "
-                      >
-                        -
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )
+          <div className="col-md-8">
+            {cart.length <= 0 && (
+              <div>
+                <h2>No product in yout cart</h2>
+              </div>
             )}
-        </div>
-        <div className="col-md-4">
-          <h1>Total amount</h1>
-          <div className="payment">
-            <div className="pay-form">
-              <span className="total">Total of products:</span>
-              <span className="total floatRight">{total}$</span>
+            {cart.length > 0 &&
+              cart.map(
+                (
+                  { idProduct, image, nameFood, price, foodAdress, count },
+                  key
+                ) => (
+                    <div key={idProduct} className="cart-box">
+                      <div className="container-fluid">
+                        <div className="row">
+                          <div className="col-sm-7" style={{paddingLeft:'0', paddingRight:'0'}}>
+                            <div className="cart-image" >
+                              <img src={API_URL + "/images/" + image} />
+                            </div>
+                          </div>
+                          <div className="col-sm-5">
+                            <div style={{ marginLeft: "20px" }} className="product-cart ">
+                              <h2>{nameFood}</h2>
+                              <h3>{foodAdress}</h3>
+                              <h4>{ new Intl.NumberFormat().format(price)} VND</h4>
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => removeProduct(idProduct, nameFood)}
+                                data-toggle="modal"
+                                data-target="#exampleModal"
+                              >
+                                Remove product
+                              </button>
+                              <div className="quantity textAlignRight  flexBox">
+                                <button
+                                  onClick={() => increaseProduct(idProduct)}
+                                  className="quantity increase"
+                                >
+                                  +
+                                </button>
+                                <input defaultValue="0" className="quantity" value={count} />
+                                <button
+                                  onClick={() => reduceProduct(idProduct)}
+                                  className="quantity decrease "
+                                >
+                                  -
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  )
+              )}
+          </div>
+          <div className="col-md-4 shadow-sm" style={{paddingTop:'20px'}}>
+            <h1>Total amount</h1>
+            <div className="payment">
+              <div className="pay-form">
+                <span className="total">Total of products:</span>
+                <span className="total floatRight">{new Intl.NumberFormat().format(total)} VND</span>
+                <br />
+                <span className="total ship">Ship cash:</span>
+                <span className="total floatRight">0</span>
+              </div>
+              <span className="total">
+                Total:<span>(Included VAT)</span>
+              </span>
+              <span className="total floatRight">{new Intl.NumberFormat().format(total)} VND</span>
               <br />
-              <span className="total ship">Ship cash:</span>
-              <span className="total floatRight">0$</span>
-            </div>
-            <span className="total">
-              Total:<span>(Included VAT)</span>
-            </span>
-            <span className="total floatRight">{total}$</span>
-            <br />
-            <button
-              onClick={() => {
-                showModalCart();
-              }}
-              className="submit-cart"
-            >
-              {" "}
+              <button
+                onClick={() => {
+                  showModalCart();
+                }}
+                className="submit-cart"
+              >
+                {" "}
               Submit
             </button>
-            <Modal
-              title="Submit"
-              visible={isVisible}
-              onOk={handleOK}
-              footer={[
-                <Button onClick={handleClose} key="back">
-                  Return
+              <Modal
+                title="Submit"
+                visible={isVisible}
+                onOk={handleOK}
+                footer={[
+                  <Button onClick={handleClose} key="back">
+                    Return
                 </Button>,
-                <Button onClick={() => handleOK()} key="submit" type="primary">
-                  OK
+                  <Button onClick={() => handleOK()} key="submit" type="primary">
+                    OK
                 </Button>,
-              ]}
-            >
-              <div>Do you have any note:</div>
-              <Input
-                onChange={(e) => {
-                  onChangeNote(e);
-                }}
-                placeholder="Ex: Extra cheese,..."
-              />
-            </Modal>
+                ]}
+              >
+                <div>Do you have any note:</div>
+                <Input
+                  onChange={(e) => {
+                    onChangeNote(e);
+                  }}
+                  placeholder="Ex: Extra cheese,..."
+                />
+              </Modal>
+            </div>
           </div>
         </div>
-        </div>
-        
-        
+
+
       </div>
     </div>
   );

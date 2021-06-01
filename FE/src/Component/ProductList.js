@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Spin, Input } from "antd";
+import { Spin, Input, Result, Button } from "antd";
 import { context } from "../Context/Context";
 import {
   SmileOutlined,
@@ -68,7 +68,12 @@ function ProductList(props) {
               {isLoading && (
                 <Spin size={"large"} style={{ margin: "100px 500px" }} />
               )}
-              {product <= 0 && <h1>No product available</h1>}
+              {product <= 0 && 
+              <Result
+              status="404"
+              title="404"
+              subTitle="Sorry, there are no product available"
+              />}
               {product.length > 0 &&
                 product.map((value, key) => (
                   <div className="col-md-3 col-6">
@@ -106,7 +111,7 @@ function ProductList(props) {
                       <h7 className="text-secondary h6 mb-2">
                         {value.foodAdress}
                       </h7>
-                      <h5 className="mb-0 text-primary">${value.price}</h5>
+                      <h5 className="mb-0 text-primary">{ new Intl.NumberFormat().format(value.price)} VND</h5>
                     </div>
                   </div>
                   </div>
