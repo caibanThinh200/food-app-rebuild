@@ -206,9 +206,9 @@ export const ContextProvider = (props) => {
     };
     //console.log(dataUser);
     axios.post(API_URL + "/User/login", dataUser).then((res) => {
+      console.log(res.data)
       if (res.data.token) {
         localStorage.setItem("token", JSON.stringify(res.data));
-
         setVisible(false);
         notification.open({
           style: { marginTop: "100px" },
@@ -281,7 +281,7 @@ export const ContextProvider = (props) => {
     });
   };
   const [cart, setCart] = useState([]);
-  //const [count,setCount] = useState(1);
+  const [count,setCount] = useState(1);
 
   const addCart = (id) => {
     const token = JSON.parse(localStorage.getItem("token"));
