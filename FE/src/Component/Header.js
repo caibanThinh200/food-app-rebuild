@@ -114,7 +114,7 @@ function Header(props) {
   );
   return (
     <div className="bg-dark">
-     <p style={{marginBottom:'0', padding: '5px 15px'}} className="text-white"><i class="fal fa-map-marker-alt" style={{marginRight:'10px'}}></i>Address: 100 Abc EDF street HoChiMinh City</p>
+     <p style={{marginBottom:'0', padding: '5px 15px'}} className="text-white"><i class="fal fa-map-marker-alt" style={{marginRight:'10px'}}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>
       <nav className="navbar navbar-expand-lg navbar-light bg-warning">
         <div className="container-fluid">
           <div className="row">
@@ -154,7 +154,7 @@ function Header(props) {
                 ) : (
                     <>
                       <button
-                        className="link"
+                        className="link bg-danger"
                         onClick={showModal}
                       >
                         Login now

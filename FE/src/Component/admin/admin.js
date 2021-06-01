@@ -10,8 +10,8 @@ const Admin = ({com}) => {
         value?setTheme('dark'):setTheme('light')
     }
     const style = {
-        backgroundColor: 'black',
-        color: 'white',
+        background: 'rgba(0,0,0,0.1)',
+        color: 'rgba(255, 99, 71, 0.5)',
         fontSize: '20px',
         marginTop: '0',
     }

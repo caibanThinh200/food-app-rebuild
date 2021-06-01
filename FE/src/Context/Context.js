@@ -11,7 +11,6 @@ export const context = React.createContext();
 export const ContextProvider = (props) => {
   // const API_URL = "http://localhost:3010";
   const API_URL = "http://108.160.134.9:3010";
-
   const [isLoading, setIsLoading] = useState(true);
   //Register
 
@@ -343,7 +342,7 @@ export const ContextProvider = (props) => {
   const onChangeSearch = (e) => {
     if (e.target.value !== "") {
       setTimeout(() => {
-        document.getElementsByClassName("search-input")[0].style.top = "-100px";
+        document.getElementsByClassName("search-input")[0].style.top = "0px";
       }, 500);
 
       setTimeout(() => {

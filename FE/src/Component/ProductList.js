@@ -123,7 +123,7 @@ function ProductList(props) {
         <section>
           <div className="container">
             <div className="row ">
-              {!isLoading &&
+              {!isLoading && bestSaled&&
                 bestSaled.map((value, key) => (
                   <div className="col-md-3 col-6">
                   <div

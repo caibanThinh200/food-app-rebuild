@@ -88,7 +88,7 @@ function HomeHeader(props) {
             </div>
 
             <div className="header-image">
-              <img src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_637/v1571089524/assets/86/deebcb-1975-4c81-96b7-7b126fe2f0f3/original/UberEatsOffers.png" />
+              <img src="https://mcdonalds.vn/uploads/2018/news/1-1.jpg"/>
             </div>
 
             <div className="header-image">

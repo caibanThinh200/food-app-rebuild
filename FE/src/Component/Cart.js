@@ -101,7 +101,9 @@ function Cart(props) {
   return (
     <div className="cart-container">
       <div className="cart-header textAlignCenter">
-        <h1 className="voucher">Uber cart</h1>
+        <div className="voucher">
+        <h1>Your cart</h1>
+        </div>
       </div>
 
       <div className="cart-content">

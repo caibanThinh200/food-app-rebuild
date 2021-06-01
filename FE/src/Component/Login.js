@@ -157,6 +157,7 @@ function SignIn(props) {
             <h1 className="user-title">Login User</h1>
             <div className="register-form">
               <Input
+                size="large"
                 onChange={(e) => {
                   onChangeUsername(e);
                 }}
@@ -164,6 +165,7 @@ function SignIn(props) {
               />
 
               <Input
+              size="large"
                 onChange={(e) => {
                   onChangePassword(e);
                 }}

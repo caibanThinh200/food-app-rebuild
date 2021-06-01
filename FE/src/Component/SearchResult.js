@@ -54,16 +54,17 @@ function SearchResult(props) {
             key={idProduct}
             className="search-product-result"
           >
-            <div className="col-sm-4">
+            <div className="row">
+            <div className="col-sm-3">
               <img
                 className="search-product-image floatLeft"
-                src={"http://localhost:3010/images/" + image}
+                src={ API_URL + "/images/" + image}
               />
             </div>
-            <div className="col-sm-8 search-title">
+            <div className="col-sm-9 search-title">
               <h4>{nameFood}</h4>
             </div>
-            <div className="clear-both"></div>
+            </div>
           </div>
         ))
       ) : (
