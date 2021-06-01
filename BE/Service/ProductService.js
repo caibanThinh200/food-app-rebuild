@@ -121,15 +121,15 @@ class ProductService {
       let productSubmit = req.body;
       //console.log(productSubmit);
       productSubmit.forEach(async (item) => {
-        let productData = await querryBuilder("product")
+        let productData = await querryBuilder("product")  
           .where("idProduct", item.idProduct)
-          .select()
+          .select("saled")
           .first();
         let productStringlify = JSON.stringify(productData);
         let product = JSON.parse(productStringlify);
         await querryBuilder("product")
           .where("idProduct", item.idProduct)
-          .update("saled", product.count + item.count);
+          .update("saled", product.saled + item.count);
       });
 
       return "increase success";
