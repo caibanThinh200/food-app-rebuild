@@ -10,7 +10,7 @@ const Admin = ({com}) => {
         value?setTheme('dark'):setTheme('light')
     }
     const style = {
-        background: 'rgba(0,0,0,0.1)',
+        background: 'rgba(0,0,0,0)',
         color: 'rgba(255, 99, 71, 0.5)',
         fontSize: '20px',
         marginTop: '0',
@@ -33,7 +33,7 @@ const Admin = ({com}) => {
                         <Menu.Item icon={<UserOutlined/>}>User Management</Menu.Item>
                         <SubMenu key="sub2" icon={<FileDoneOutlined />} title="Orders">
                             <Menu.Item icon={<ContainerOutlined />} key="5">List orders</Menu.Item>
-                            <Menu.Item icon={<BarChartOutlined/>} key="6">Nghia chau</Menu.Item>
+                            <Menu.Item icon={<BarChartOutlined/>} key="6"><Link to="/admin/chart">Chart</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub4" icon={<SettingOutlined />} title="Setting">
                             <Menu.Item key="10"> 

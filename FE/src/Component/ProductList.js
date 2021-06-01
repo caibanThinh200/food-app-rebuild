@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Spin, Input, Result, Button } from "antd";
 import { context } from "../Context/Context";
+import { Spin, Input, Result, Button } from "antd";
 import {
   SmileOutlined,
   RadiusUpleftOutlined,
@@ -167,7 +167,7 @@ function ProductList(props) {
                         {value.foodAdress}
                       </h7>
 
-                      <h5 className="mb-0 text-primary">${value.price}</h5>
+                      <h5 className="mb-0 text-primary">{new Intl.NumberFormat().format(value.price)} VND</h5>
                     </div>
                   </div>
                   </div>
