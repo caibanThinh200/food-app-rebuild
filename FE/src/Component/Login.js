@@ -67,14 +67,14 @@ function SignIn(props) {
         <div className="toggle-form">
           <button
             data-bs-target="#carouselExampleIndicators"
-            onClick={() => {props.changeTextLogin(); setDisable(!disable)}}
+            onClick={() => { props.changeTextLogin(); setDisable(!disable) }}
             data-bs-slide-to="1"
             className="active"
             disabled={disable}
           >Login</button>
           <button
             data-bs-target="#carouselExampleIndicators"
-            onClick={() => {props.changeTextRegister(); setDisable(!disable)}}
+            onClick={() => { props.changeTextRegister(); setDisable(!disable) }}
             data-bs-slide-to="0"
             disabled={!disable}
           >Register</button>
@@ -84,17 +84,17 @@ function SignIn(props) {
             <h1 className="user-title">Register User</h1>
             <div className="register-form">
               <div className="form-item">
-              <Input
-                name="fullname"
-                onChange={(e) => {
-                  onChangeFullName(e);
-                }}
-                type="text"
-                placeholder="Nhập họ tên ..."
-              />
+                <Input
+                  name="fullname"
+                  onChange={(e) => {
+                    onChangeFullName(e);
+                  }}
+                  type="text"
+                  placeholder="Nhập họ tên ..."
+                />
               </div>
               <div className="form-item">
-              <DatePicker
+                <DatePicker
                   onChange={(e) => {
                     onChangeBirth(e);
                   }}
@@ -103,46 +103,46 @@ function SignIn(props) {
                 />
               </div>
               <div className="form-item">
-              <Input
-                onChange={(e) => {
-                  onChangePhoneNum(e);
-                }}
-                placeholder="Nhập số điện thoại ..."
-              />
+                <Input
+                  onChange={(e) => {
+                    onChangePhoneNum(e);
+                  }}
+                  placeholder="Nhập số điện thoại ..."
+                />
               </div>
               <div className="form-item">
-              <Input
-                onChange={(e) => {
-                  onChangeAddress(e);
-                }}
-                placeholder="Nhập địa chỉ ..."
-              />
+                <Input
+                  onChange={(e) => {
+                    onChangeAddress(e);
+                  }}
+                  placeholder="Nhập địa chỉ ..."
+                />
               </div>
-                <div className="form-item">
+              <div className="form-item">
                 <Input
-                onChange={(e) => {
-                  onChangeMail(e);
-                }}
-                placeholder="Nhập email ..."
-              />
-                </div>
-                <div className="form-item">
+                  onChange={(e) => {
+                    onChangeMail(e);
+                  }}
+                  placeholder="Nhập email ..."
+                />
+              </div>
+              <div className="form-item">
                 <Input
-                onChange={(e) => {
-                  onChangeUsername(e);
-                }}
-                placeholder="Nhập tên người dùng ..."
-              />
-                </div>
-                <div className="form-item">
+                  onChange={(e) => {
+                    onChangeUsername(e);
+                  }}
+                  placeholder="Nhập tên người dùng ..."
+                />
+              </div>
+              <div className="form-item">
                 <Input
-                onChange={(e) => {
-                  onChangePassword(e);
-                }}
-                type="password"
-                placeholder="Nhập mật khẩu ..."
-              />
-                </div>
+                  onChange={(e) => {
+                    onChangePassword(e);
+                  }}
+                  type="password"
+                  placeholder="Nhập mật khẩu ..."
+                />
+              </div>
               <button
                 onClick={(e) => {
                   submitData(e);
@@ -156,6 +156,7 @@ function SignIn(props) {
           <div className="carousel-item active">
             <h1 className="user-title">Login User</h1>
             <div className="register-form">
+              <div className="form-item">
               <Input
                 size="large"
                 onChange={(e) => {
@@ -164,17 +165,28 @@ function SignIn(props) {
                 placeholder="Nhập tên người dùng ..."
               />
 
-              <Input
-              size="large"
+              </div>
+             <div className="form-item">
+             <Input
+                size="large"
                 onChange={(e) => {
                   onChangePassword(e);
                 }}
                 type="password"
                 placeholder="Nhập mật khẩu ..."
               />
-              <br />
-
-              <button
+             </div>
+             {errorLogin && (
+                <div className="alert-errors">
+                  <Alert
+                    message="Invalid username or password"
+                    type="error"
+                    showIcon
+                  />
+                </div>
+              )}
+             <div className="form-item" style={{width: '100%'}}>
+             <button
                 onClick={(e) => {
                   submitLogin(e);
                   props.disable();
@@ -183,14 +195,8 @@ function SignIn(props) {
               >
                 Login
               </button>
-              {errorLogin && (
-                <Alert
-                  style={{ width: "70%", margin: "30px 60px" }}
-                  message="Invalid username or password"
-                  type="error"
-                  showIcon
-                />
-              )}
+             </div>
+
             </div>
           </div>
         </div>

@@ -46,27 +46,31 @@ const Detail = (props) => {
     return <div className="loading">loading......</div>;
   } else {
     return (
-      <main className="container" style={{minHeight:'60vh'}}>
-        <Link style={{ width: "100px" }} to="/product">
-          Go back
-        </Link>
+      <main className="container" id="detail-page" style={{minHeight:'60vh'}}>
         {detail.map(({ idProduct, nameFood, image, price, count }) => (
           <div className="container" key={idProduct}>
+            <div className="row">
+              <div>
+              <Link id="go-back" style={{ width: "100px" }} to="/product">
+                <button><i class="fas fa-long-arrow-left"></i>Go back</button>
+              </Link>
+              </div>
+            </div>
             <div className="row">
               <div className="col-md-6">
                 <img
                   className="main-img"
-                  src={"http://localhost:3010/images/" + image}
+                  src={API_URL + "/images/" + image}
                   alt=""
                 />
                 <div className="product-list-image">
-                  {images.length > 0 &&
+                  {/* {images.length &&
                     images.map(({ id, image }) => (
                       <img
                         key={id}
-                        src={"http://localhost:3010/images/" + image}
+                        src={API_URL + "/images/" + image}
                       />
-                    ))}
+                    ))} */}
                 </div>
               </div>
               <div className="col-md-6">

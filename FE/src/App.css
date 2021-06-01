@@ -80,10 +80,29 @@ th{
   font-size: 18px;
   margin-left: 10px;
 }
-.fas{
+.fas, .card-body .fal{
   font-size: 40px;
   color: white;
   margin-right: 30px;
+}
+#detail-page{
+  margin-top: 70px;
+}
+#go-back button{
+  height: 35px;
+  width: 120px;
+  border-style: none;
+  margin-bottom: 10px;
+  color: red;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid red;
+  opacity: 0.8;
+}
+#go-back button .fas{
+  font-size: 15px;
+  margin-right: 10px;
+  color: red;
 }
 .textAlignCenter{
   text-align: center;
@@ -128,6 +147,10 @@ th{
 .form-item{
   margin-bottom: 5px;
   display: flex;
+}
+.alert-errors{
+  width: 100%;
+  background-color: chartreuse;
 }
 .toggle-form{
   width: 100%;
@@ -760,9 +783,8 @@ th{
     width: 40%;
   }
 }
-.cart-content{
-  width: auto;
-  height: auto;
+.card-body i{
+  cursor: pointer;
 }
 .cart-content-left{
   padding: 5%;
@@ -900,7 +922,7 @@ th{
   margin-bottom: 20px;
 }
 .product-description span {
-  font-size: 12px;
+  font-size: 17px;
   color: #358ED7;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -991,7 +1013,7 @@ th{
 .cable-config a {
   color: #358ED7;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 15px;
   position: relative;
   margin: 10px 0;
   display: inline-block;

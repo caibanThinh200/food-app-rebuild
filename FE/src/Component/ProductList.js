@@ -92,7 +92,7 @@ function ProductList(props) {
                           </Link>
                           <i
                             onClick={() => addCart(value.idProduct)}
-                            className="fas fa-shopping-cart"
+                            className="fal fa-shopping-cart"
                           ></i>
                         </div>
                       </div>

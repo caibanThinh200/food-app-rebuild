@@ -106,8 +106,9 @@ function Cart(props) {
         </div>
       </div>
 
-      <div className="cart-content">
-        <div className="cart-content-left floatLeft">
+      <div className="cart-content container">
+        <div className="row">
+        <div className="col-md-8">
           <h1>Product</h1>
           {cart.length <= 0 && (
             <div>
@@ -160,7 +161,7 @@ function Cart(props) {
               )
             )}
         </div>
-        <div className="cart-content-right floatLeft">
+        <div className="col-md-4">
           <h1>Total amount</h1>
           <div className="payment">
             <div className="pay-form">
@@ -207,6 +208,9 @@ function Cart(props) {
             </Modal>
           </div>
         </div>
+        </div>
+        
+        
       </div>
     </div>
   );
