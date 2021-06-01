@@ -46,29 +46,30 @@ const Detail = (props) => {
     return <div className="loading">loading......</div>;
   } else {
     return (
-      <main className="container">
+      <main className="container" style={{minHeight:'60vh'}}>
         <Link style={{ width: "100px" }} to="/product">
           Go back
         </Link>
         {detail.map(({ idProduct, nameFood, image, price, count }) => (
           <div className="container" key={idProduct}>
-            <div className="left-column">
-              <img
-                className="main-img"
-                src={"http://localhost:3010/images/" + image}
-                alt=""
-              />
-              <div className="product-list-image">
-                {images.length > 0 &&
-                  images.map(({ id, image }) => (
-                    <img
-                      key={id}
-                      src={"http://localhost:3010/images/" + image}
-                    />
-                  ))}
+            <div className="row">
+              <div className="col-md-6">
+                <img
+                  className="main-img"
+                  src={"http://localhost:3010/images/" + image}
+                  alt=""
+                />
+                <div className="product-list-image">
+                  {images.length > 0 &&
+                    images.map(({ id, image }) => (
+                      <img
+                        key={id}
+                        src={"http://localhost:3010/images/" + image}
+                      />
+                    ))}
+                </div>
               </div>
-            </div>
-            <div className="right-column">
+              <div className="col-md-6">
               {/* Product Description */}
               <div className="product-description">
                 {cate.length > 0 &&
@@ -101,6 +102,7 @@ const Detail = (props) => {
                   Add to cart
                 </a>
               </div>
+            </div>
             </div>
           </div>
         ))}

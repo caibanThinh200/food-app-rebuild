@@ -81,28 +81,6 @@ function HomeHeader(props) {
   return (
     <div className="head-container container-fluid">
       <div className="row">
-        <div className="col-12 ">
-          <div className="container part-1">
-            <div className="row">
-              <div className="col-lg-7">
-                  <div className="header-title">
-                    <h1>Helping to keep each other safe</h1>
-                    <h4>
-                      We’re actively monitoring the COVID-19 situation and are
-                      continually working to help keep those who rely on our platform
-                      healthy and safe.
-                    </h4>
-                  </div>
-              </div>
-              <div className="col-lg-5 ">
-                <div className="header-description">
-                </div>
-              </div>
-            </div>
-          </div>          
-        </div>
-      </div>
-      <div className="row">
         <div className="col-12" style={{padding:'0'}}>
           <div className="header-content">
             <div className="header-image">
@@ -151,6 +129,28 @@ function HomeHeader(props) {
             </Group>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 ">
+          <div className="container part-1">
+            <div className="row">
+              <div className="col-lg-7">
+                  <div className="header-title">
+                    <h1>Helping to keep each other safe</h1>
+                    <h4>
+                      We’re actively monitoring the COVID-19 situation and are
+                      continually working to help keep those who rely on our platform
+                      healthy and safe.
+                    </h4>
+                  </div>
+              </div>
+              <div className="col-lg-5 ">
+                <div className="header-description">
+                </div>
+              </div>
+            </div>
+          </div>          
         </div>
       </div>
     </div>
