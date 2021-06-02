@@ -137,6 +137,11 @@ function Header(props) {
                   <Link to="/cart" className="nav-link " aria-current="page">Cart ({cart[0].length})</Link>
                   <Link to="/" className="nav-link " aria-current="page" >About us</Link>
                   <Link to="/" className="nav-link " aria-current="page" >Contact</Link>
+                  {
+                    !isExpired && decodedToken && decodedToken.role === "admin" && <Link className="nav-link active" to="/admin" replace>
+                      Admin page
+                    </Link>
+                  }
                 </div>
                 {!isExpired ? (
                   <span style={{ marginLeft: "35%", width: "100px" }}>

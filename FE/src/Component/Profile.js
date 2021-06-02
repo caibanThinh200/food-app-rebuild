@@ -117,7 +117,7 @@ const Profile = () => {
                       >
                         <img
                           style={{ width: "100%", height: "100%" }}
-                          src={"http://localhost:3010/images/" + avatar}
+                          src={ API_URL + "/images/" + avatar}
                         />
                         <Button
                           style={{ margin: "30px 80px" }}

@@ -99,7 +99,7 @@ function Cart(props) {
     setIsVisible(false);
   };
   return (
-    <div className="cart-container">
+    <div className="cart-container" style={{marginBottom:'150px'}}>
       <div className="cart-header textAlignCenter">
         <div className="voucher">
           <h1>Your cart</h1>
