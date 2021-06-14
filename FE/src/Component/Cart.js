@@ -79,7 +79,7 @@ function Cart(props) {
         note: note,
         total: total,
       };
-      axios.post("http://localhost:3010" + "/Bill", billInsert).then(() => {
+      axios.post(API_URL + "/Bill", billInsert).then(() => {
         notification.open({
           message: "Submit success",
           description: "Please check your bill",
