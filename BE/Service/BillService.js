@@ -6,6 +6,7 @@ class BillService {
   static async addBillService(req, res, next) {
     try {
       const { cart, user, note, total } = req.body;
+      console.log(req.body);
       let billInsert = {
         idBill: uuid.v4(),
         idUser: user,

@@ -146,10 +146,8 @@ class UserService {
   }
   static async changeAvatarService(req, res, next) {
     try {
-      const avatar = req.file.filename;
-
-      await querryBuilder("users").update("avatar", avatar);
-
+      const avatar = req.file ? req.file.filename : "";
+      await querryBuilder("users").update({avatar}); 
       return "Uploaded ";
     } catch (e) {
       console.log(e);
