@@ -1,5 +1,5 @@
 import { Button, Layout, Modal, Upload, message } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../Context/Context";
 import { useParams } from "react-router-dom";
@@ -32,51 +32,47 @@ const Profile = () => {
   const { API_URL } = useContext(context);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
+  console.log(imageURL);
   const getUserInfoByParam = () => {
     fetch(API_URL + "/User/" + id)
       .then((res) => res.json())
       .then((json) => setUser(json.data));
   };
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) => {
-        setImage(info.file.originFileObj);
-
-        setImageName(info.file.name);
-        setImageURL(imageUrl);
-        setLoading(false);
-      });
-    }
+  const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
   const showModal = () => {
     setModal(true);
   };
   const handleOk = async () => {
-    console.log(image);
     const form = new FormData();
-
-    form.append("file", image);
-
+    form.append("file", imageURL, imageURL.name);
+    form.forEach(element => {
+      console.log(element);
+    });
     axios
-      .put(API_URL + "/User/profile/" + id, form, {
+      .put("http://localhost:3010" + "/User/profile/" + id, form, {
         header: {
           "Content-type": "multipart/form-data",
         },
       })
       .then((res) => {
+        getUserInfoByParam();
+        setImageURL("");
         console.log(res);
       });
     setModal(false);
@@ -84,11 +80,12 @@ const Profile = () => {
   };
   const handleCancel = () => {
     setModal(false);
+    setImageURL("")
   };
 
   useEffect(() => {
     getUserInfoByParam();
-  }, [user]);
+  }, [JSON.stringify(user)]);
 
   return (
     <div className=" emp-profile">
@@ -117,7 +114,7 @@ const Profile = () => {
                       >
                         <img
                           style={{ width: "100%", height: "100%" }}
-                          src={"http://localhost:3010/images/" + avatar}
+                          src={avatar  ? ("http://localhost:3010/images/" + avatar) : "https://p.kindpng.com/picc/s/421-4212296_default-avatar-portable-network-graphics-hd-png-download.png"}
                         />
                         <Button
                           style={{ margin: "30px 80px" }}
@@ -134,26 +131,8 @@ const Profile = () => {
                           onOk={handleOk}
                           onCancel={handleCancel}
                         >
-                          <Upload
-                            name="file"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            method="POST"
-                            beforeUpload={beforeUpload}
-                            onChange={handleChange}
-                          >
-                            {imageURL ? (
-                              <img
-                                src={imageURL}
-                                alt="avatar"
-                                style={{ width: "100%" }}
-                              />
-                            ) : (
-                              uploadButton
-                            )}
-                          </Upload>
+                          <input type="file" onChange={(e) => setImageURL(e.target.files[0])}/>
+                          {imageURL && imageURL.name}
                         </Modal>
                       </div>
 

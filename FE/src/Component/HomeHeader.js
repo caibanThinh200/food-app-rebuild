@@ -28,7 +28,6 @@ function HomeHeader(props) {
       let description = `<h1>Request a ride now</h1><br/>
             <h4>Greater transparency for shippers and carriers to do business together.</h4>
             <button className="btn btn-primary">Book now</button>`;
-
       descrip.innerHTML = description;
     }
   };

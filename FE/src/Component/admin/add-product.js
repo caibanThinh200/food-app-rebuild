@@ -1,5 +1,6 @@
 import { Form, Input, InputNumber, Select } from 'antd'
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { context } from '../../Context/Context';
 const layout = {
@@ -16,12 +17,48 @@ const AddProduct = () => {
         API_URL,
         cate,
         getCate,
-    } = useContext(context)
+    } = useContext(context),
+    [imageURL, setImageURL] = useState(""),
+    [info, setInfo] = useState({})
     useEffect(()=>{
         getCate()
     },[])
-    const handleAddNewProduct = (value) =>{
-        console.log(value)
+    const handleChange = (e) => {
+        
+        const newInfo = {
+            [e.target.name]: e.target.value
+        }
+        setInfo({...info, ...newInfo})
+    }
+    const handleChangeFile = (e) => {
+        const newInfo = {
+            [e.target.name]: [e.target.files[0],e.target.files[0].name]
+        }
+        setInfo({...info, ...newInfo})
+    }
+    const handleChangeSelection = (e,value) => {
+        console.log(e,value);
+        const newInfo = {
+            [e.name]: value
+        }
+        setInfo({...info, ...newInfo})
+    }
+
+    const handleAddNewProduct = (value) => {
+        const form = new FormData();
+        Object.entries(info).map(e => {
+            if(e[0] === "image") {
+                form.append(e[0],e[1][0],e[1][1])
+            }
+            else {
+                form.append(e[0],e[1])
+            }
+        })
+
+        axios.post("http://localhost:3010" + "/Home", form)
+        .then(res => {
+            console.log(res);
+        })
     }
     return (
         <div className="container bg-white">
@@ -40,37 +77,47 @@ const AddProduct = () => {
                         <Form.Item
                             label="Food name"
                             name="nameFood"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            rules={[{ required: true, message: 'Please input your name!'}]}
                         >
-                            <Input />
+                            <Input name="nameFood" onChange={handleChange}/>
                         </Form.Item>
                         <Form.Item
                             label="Food address"
-                            name="foodAddress"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            name="address"
+                            rules={[{ required: true, message: 'Please input your address!' }]}
                         >
-                            <Input />
+                            <Input name="address" onChange={handleChange}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Food image"
+                            name="image"
+                            rules={[{ required: true, message: 'Please choose your image!' }]}
+                        >
+                            <Input name="image" type="file" onChange={handleChangeFile}/>
                         </Form.Item>
                         <Form.Item
                             label="Category"
-                            name="idCategory"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            name="idCate"
+                            rules={[{ required: true, message: 'Please choose your category!' }]}
                         >
                             <Select
                                 placeholder="Select your food category"
                                 allowClear
+                                name="idCate"
+                                onChange={(value,e) => handleChangeSelection(e,value)}
                             >
                                 {cate.map(category=>(
-                                    <Option value={category.idCategory}> {category.nameCategory} </Option>
+                                    <Option name="idCate" value={category.idCategory}> {category.nameCategory} </Option>
                                 ))}
                             </Select>
                         </Form.Item>
                         <Form.Item
                             label="Price"
                             name="price"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            rules={[{ required: true, message: 'Please input price!' }]}
+                            onChange={handleChange}
                         >
-                            <InputNumber style={{width:'50%'}} />
+                            <InputNumber name="price" style={{width:'50%'}} />
                         </Form.Item>
                         <Form.Item {...tailLayout}>
                             <button className="btn-add-product bg-warning">Confirm</button>
