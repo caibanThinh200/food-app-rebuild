@@ -74,6 +74,7 @@ class UserService {
           const token = jwt.sign(
             {
               id: user.UserId,
+              phone: user.phoneNum,
               username: user.Username,
               fullname: user.Fullname,
               address: user.UserAddress,

@@ -5,13 +5,15 @@ const { queryBuilder } = require("../config/databse");
 class BillService {
   static async addBillService(req, res, next) {
     try {
-      const { cart, user, note, total } = req.body;
+      const { cart, user, note, total, address, phone } = req.body;
       console.log(req.body);
       let billInsert = {
         idBill: uuid.v4(),
-        idUser: user,
-        note: note,
-        total: total,
+        idUser: user || "",
+        address: address || "",
+        phone: phone || "",
+        note: note || "",
+        total: total || 0,
         created_at: new Date(),
       };
       await querryBuilder("Bill").insert(billInsert);
