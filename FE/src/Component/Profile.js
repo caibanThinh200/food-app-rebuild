@@ -65,7 +65,7 @@ const Profile = () => {
       console.log(element);
     });
     axios
-      .put("http://localhost:3010" + "/User/profile/" + id, form, {
+      .put(API_URL + "/User/profile/" + id, form, {
         header: {
           "Content-type": "multipart/form-data",
         },

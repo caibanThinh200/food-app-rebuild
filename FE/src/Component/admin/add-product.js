@@ -55,7 +55,7 @@ const AddProduct = () => {
             }
         })
 
-        axios.post("http://localhost:3010" + "/Home", form)
+        axios.post(API_URL + "/Home", form)
         .then(res => {
             console.log(res);
         })
