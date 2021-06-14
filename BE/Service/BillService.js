@@ -94,10 +94,25 @@ class BillService {
   }
   static async getAllBillService(req, res, next) {
     try {
-      let data = await querryBuilder("Bill")
-        .select();
-      return data
-    } catch(e) {
+      let data = await querryBuilder("Bill").select();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  static async getMonthKPIService(req, res, next) {
+    try {
+      const { total, result } = req.body;
+      const insertData = {
+        id: uuid.v4(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+        result: result || 0,
+        total: total || 0,
+      };
+      await querryBuilder("KPI").insert(insertData);
+      return "KPI updated";
+    } catch (e) {
       console.log(e);
     }
   }

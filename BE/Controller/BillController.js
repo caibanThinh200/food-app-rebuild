@@ -98,13 +98,13 @@ class BillController {
   }
   static async getAllBillController(req, res, next) {
     try {
-       let data = await BillService.getAllBillService(req);
-       res.status(200).json({
+      let data = await BillService.getAllBillService(req);
+      res.status(200).json({
         status: "SUCCESS",
         data,
         error: null,
       });
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       res.status(200).json({
         status: "FAILED",
@@ -112,6 +112,26 @@ class BillController {
         error: {
           code: 1000,
           message: "get bill failed",
+        },
+      });
+    }
+  }
+  static async getKPIMonthController(req, res, next) {
+    try {
+      let result = await BillService.getMonthKPIService(req);
+      res.status(200).json({
+        status: "SUCCESS",
+        result,
+        error: null,
+      });
+    } catch (e) {
+      console.log(e);
+      res.status(200).json({
+        status: "FAILED",
+        data: null,
+        error: {
+          code: 1000,
+          message: "insert bill failed",
         },
       });
     }
