@@ -68,7 +68,7 @@ class BillService {
     try {
       let param = req.params;
 
-      let billinfo = await querryBuilder("bill")
+      let billinfo = await querryBuilder("Bill")
         .select()
         .where("idBill", param.idBill)
         .first();
@@ -80,15 +80,25 @@ class BillService {
   static async deleteBillService(req, res, next) {
     try {
       let param = req.params;
-      let data = await querryBuilder("bill")
+      let data = await querryBuilder("Bill")
         .select("idBill")
         .where("idBill", param.idBill)
         .first();
-      await querryBuilder("bill").where("idBill", data).delete();
+      await querryBuilder("Bill").where("idBill", data).delete();
       return "Bill deleted";
     } catch (e) {
       console.log(e);
     }
   }
+  static async getAllBillService(req, res, next) {
+    try {
+      let data = await querryBuilder("Bill")
+        .select();
+      return data
+    } catch(e) {
+      console.log(e);
+    }
+  }
 }
+
 module.exports = BillService;

@@ -1,6 +1,7 @@
 const route = require("express").Router();
 const BillController = require("../Controller/BillController");
 route.post("/", BillController.addBillController);
+route.get("/", BillController.getAllBillController);
 route.get("/u/:id", BillController.showBillController);
 route.get("/p/:id", BillController.showProductInBillController);
 route.get("/:idBill", BillController.getBillController);

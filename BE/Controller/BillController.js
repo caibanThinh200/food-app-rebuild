@@ -96,5 +96,25 @@ class BillController {
       });
     }
   }
+  static async getAllBillController(req, res, next) {
+    try {
+       let data = await BillService.getAllBillService(req);
+       res.status(200).json({
+        status: "SUCCESS",
+        data,
+        error: null,
+      });
+    } catch(e) {
+      console.log(e);
+      res.status(200).json({
+        status: "FAILED",
+        data: null,
+        error: {
+          code: 1000,
+          message: "get bill failed",
+        },
+      });
+    }
+  }
 }
 module.exports = BillController;
