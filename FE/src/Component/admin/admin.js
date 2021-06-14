@@ -32,7 +32,7 @@ const Admin = ({com}) => {
                         </SubMenu>
                         <Menu.Item icon={<UserOutlined/>}>User Management</Menu.Item>
                         <SubMenu key="sub2" icon={<FileDoneOutlined />} title="Orders">
-                            <Menu.Item icon={<ContainerOutlined />} key="5">List orders</Menu.Item>
+                            <Menu.Item icon={<ContainerOutlined />} key="5"><Link to="/admin/bill">List orders</Link></Menu.Item>
                             <Menu.Item icon={<BarChartOutlined/>} key="6"><Link to="/admin/chart">Chart</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub4" icon={<SettingOutlined />} title="Setting">

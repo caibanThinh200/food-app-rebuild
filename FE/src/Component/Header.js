@@ -112,6 +112,7 @@ function Header(props) {
       </Menu.Item>
     </Menu>
   );
+
   return (
     <div className="bg-dark">
      <p style={{marginBottom:'0', padding: '5px 15px'}} className="text-white"><i class="fal fa-map-marker-alt" style={{marginRight:'10px'}}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>
@@ -138,7 +139,7 @@ function Header(props) {
                   <Link to="/" className="nav-link " aria-current="page" >About us</Link>
                   <Link to="/" className="nav-link " aria-current="page" >Contact</Link>
                   {
-                    !isExpired && decodedToken && decodedToken.role === "admin" && <Link className="nav-link active" to="/admin" replace>
+                    !isExpired && userInf && userInf[0].role === "admin" && <Link className="nav-link active" to="/admin" replace>
                       Admin page
                     </Link>
                   }
