@@ -114,7 +114,7 @@ const Profile = () => {
                       >
                         <img
                           style={{ width: "100%", height: "100%" }}
-                          src={avatar  ? ("http://localhost:3010/images/" + avatar) : "https://p.kindpng.com/picc/s/421-4212296_default-avatar-portable-network-graphics-hd-png-download.png"}
+                          src={ API_URL + "/images/" + avatar}
                         />
                         <Button
                           style={{ margin: "30px 80px" }}

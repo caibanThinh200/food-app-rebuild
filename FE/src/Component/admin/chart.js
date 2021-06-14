@@ -38,17 +38,18 @@ const Chart = () =>{
                 </div>
             </div> */}
             <div className="row bg-white">
-                <Bar
+                <Line
                 style={{padding:'20px'}}
                     data={{
                         labels: cateName,
                         datasets: [{
                             label: 'Quantity',
-                            data: [12, 19, 3, 5, 2, 3],
+                            data: [12, 19, 7, 9, 3],
                             backgroundColor: [
                                 'orange'
                             ],
-                            borderWidth: 1
+                            borderColor: 'orange',
+                            borderWidth: 3
                         }]
                     }}
                     dataSet
