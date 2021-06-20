@@ -4,15 +4,14 @@ import { context } from "../Context/Context";
 import axios from "axios";
 
 function SearchResult(props) {
-  const [isLoading, setIsLoading] = useState(true);
-  const { productFilled, setProductFilled, API_URL, searchOnResult } =
+  //const [isLoading, setIsLoading] = useState(true);
+  const { productFilled, setProductFilled, API_URL, searchOnResult, isLoadingResult, setIsLoading } =
     useContext(context);
 
   const { search, searchAction } = props;
 
   const productFilter = () => {
     const search_string = search.trim().toLowerCase();
-
     axios
       .get(API_URL + "/Home")
       .then((res) => {
@@ -33,12 +32,11 @@ function SearchResult(props) {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    productFilter();
+    searchAction()
   }, [search]);
   return (
     <div className="search-result-container">
-      {isLoading && (
+      {isLoadingResult && (
         <div className="textAlignCenter">
           <Spin
             className="loading"

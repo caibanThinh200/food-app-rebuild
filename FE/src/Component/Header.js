@@ -16,7 +16,7 @@ import {
   LogoutOutlined,
   MoneyCollectFilled,
 } from "@ant-design/icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, Fragment } from "react";
 import { context } from "../Context/Context";
 import Item from "antd/lib/list/Item";
 import Login from "./Login";
@@ -48,37 +48,42 @@ function Header(props) {
     handleOk,
     onChangeSearch,
     searchAction,
+    tokenLocal,
+    token,
+    setToken,
+    getUserInfo,
+    userInf,
+    setUserInf
   } = useContext(context);
 
-  const [userInf, setUserInf] = useState([]);
-  const token = JSON.parse(localStorage.getItem("token")) || "";
-
-  const { isExpired, decodedToken } = useJwt(token.token);
-
-  const getUserInfo = () => {
-    //console.log(isExpired);
-    if (token) {
-      if (!isExpired) {
-        fetch(API_URL + "/User/s/userprofile", {
-          headers: {
-            Authorization: "Bearer " + token.token,
-          },
-        })
-          .then((res) => res.json())
-          .then((json) => setUserInf(json));
-      } else if (isExpired) {
-        alert("Token expired,please login again");
-        showModal();
-      }
-    }
-  };
-
+  
+  //const token = JSON.parse(localStorage.getItem("token")) || "";
+  const { isExpired, decodedToken } = useJwt(token);
+  
+  // const getUserInfo = () => {
+  //   //console.log(isExpired);
+  //   if (token) {
+  //     if (!isExpired) {
+  //       fetch(API_URL + "/User/s/userprofile", {
+  //         headers: {
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       })
+  //         .then((res) => res.json())
+  //         .then((json) => setUserInf(json));
+  //     } else if (isExpired) {
+  //       alert("Token expired,please login again");
+  //       showModal();
+  //     }
+  //   }
+  // };
   const disable = () => {
     setVisible(false);
   };
   const logout = () => {
     localStorage.removeItem("token");
-    setUserInf([]);
+    setToken("");
+    setUserInf({});
     notification.open({
       message: "Logout",
       description: "You have logout",
@@ -96,8 +101,10 @@ function Header(props) {
     getProduct();
   }, []);
   useEffect(() => {
-    getUserInfo();
-  }, [token.token]);
+    if(tokenLocal.token !== "") {
+      getUserInfo();
+    }
+  }, [tokenLocal.token]);
 
   const menu = (id) => (
     <Menu style={{ width: "100px" }}>
@@ -139,21 +146,21 @@ function Header(props) {
                   <Link to="/" className="nav-link " aria-current="page" >About us</Link>
                   <Link to="/" className="nav-link " aria-current="page" >Contact</Link>
                   {
-                    !isExpired && userInf && userInf[0].role === "admin" && <Link className="nav-link active" to="/admin" replace>
+                    token && !isExpired && userInf && userInf?.role === "admin" && <Link className="nav-link active" to="/admin" replace>
                       Admin page
                     </Link>
                   }
                 </div>
-                {!isExpired ? (
+                {tokenLocal.token ? (
                   <span style={{ marginLeft: "35%", width: "100px" }}>
-                    {decodedToken && (
+                    {userInf && (
                       <Dropdown.Button
                         style={{ float: "right" }}
                         size="large"
-                        overlay={menu(decodedToken.id)}
-                        key={decodedToken.id}
+                        overlay={menu(userInf.UserId)}
+                        key={userInf.UserId}
                       >
-                        Hello {decodedToken.username}
+                        Hello {userInf.Fullname}
                       </Dropdown.Button>
                     )}
                   </span>

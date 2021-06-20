@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Detail = (props) => {
-  const { API_URL, isLoading, setIsLoading, addCart } = useContext(context);
+  const { API_URL, isLoading, setIsLoading, addCart, getDetailProduct} = useContext(context);
 
   const { id } = useParams();
 
@@ -34,7 +34,7 @@ const Detail = (props) => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    getDetail();
+    getDetailProduct(id);
     getListImages();
     console.log(images);
   }, []);
