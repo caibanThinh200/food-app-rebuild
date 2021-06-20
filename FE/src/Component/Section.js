@@ -89,7 +89,6 @@ function Section(props){
                  <Contact/>
                </Route>
                 </div>
-                
             </Switch>
       )
 } 
