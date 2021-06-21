@@ -31,6 +31,7 @@ const Detail = (props) => {
       .then((json) => setImages(json.data));
   };
   useEffect(() => {
+    getDetail();
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -40,7 +41,7 @@ const Detail = (props) => {
   }, []);
   useEffect(() => {
     getCate();
-  });
+  },[JSON.stringify(cate)]);
 
   if (isLoading) {
     return <div className="loading">loading......</div>;
