@@ -32,11 +32,9 @@ class BillService {
   }
   static async showListBillService(req, res, next) {
     try {
-      let billId = req.params.id;
-
+      let userId = req.params.id;
       let billData = await querryBuilder("Bill")
-        .where("idBill", billId)
-        .orderBy("created_at", "desc")
+        .where("idUser", userId)
         .select();
       let bill = JSON.parse(JSON.stringify(billData));
       return bill;
