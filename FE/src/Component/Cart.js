@@ -102,7 +102,7 @@ function Cart(props) {
         total: total,
       };
       console.log(billInsert)
-      axios.post(DEV_URL + "/Bill", billInsert).then(() => {
+      axios.post(API_URL + "/Bill", billInsert).then(() => {
         notification.open({
           message: "Submit success",
           description: "Please check your bill",

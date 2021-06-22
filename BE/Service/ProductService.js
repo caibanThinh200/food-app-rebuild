@@ -13,7 +13,8 @@ class ProductService {
         idCategory: data.idCate,
         nameFood: data.nameFood,
         price: data.price,
-        foodAddress: data.address,
+        foodAddress: 0,
+        description: data.description,
         image: req.file.filename,
         created_at: new Date(),
       };
