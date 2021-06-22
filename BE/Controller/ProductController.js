@@ -99,6 +99,26 @@ class ProductController {
       });
     }
   }
+  static async updateProductController(req, res, next) {
+    try {
+      let result = await ProductService.updateProductService(req);
+      res.status(200).json({
+        status: "SUCCESS",
+        error: null,
+        result,
+      });
+    } catch(e) {
+      console.log(e)
+      res.status(200).json({
+        status: "FAILED",
+        error: {
+          code: 1000,
+          message: "update product failed",
+        },
+        data: null,
+      });
+    }
+  }
   static async postImageOfProductController(req, res, next) {
     try {
       let data = await ProductService.postImageOfProductService(req);

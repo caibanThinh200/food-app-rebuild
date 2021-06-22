@@ -13,7 +13,8 @@ class ProductService {
         idCategory: data.idCate,
         nameFood: data.nameFood,
         price: data.price,
-        foodAddress: data.address,
+        foodAddress: 0,
+        description: data.description,
         image: req.file.filename,
         description:data.description,
         created_at: new Date(),
@@ -89,6 +90,25 @@ class ProductService {
     } catch (e) {
       console.log(e);
     }
+  }
+  static async updateProductService(req, res, next) {
+    let { id } = req.params;
+    const data = req.body;
+    const filename = req.file ? req.file.filename : "";
+    const currentInfo = await querryBuilder("product").where("idProduct", id).select().first();
+    const parse = JSON.parse(JSON.stringify(currentInfo));
+    console.log(parse); 
+    const updateInfo = {
+      idCategory: data.idCate || parse.idCategory,
+      nameFood: data.nameFood || parse.nameFood,
+      price: data.price || parse.price,
+      foodAddress: data.address || parse.foodAddress,
+      description: data.description || parse.description,
+      image: filename || parse.image,
+      updated_at: new Date()
+    }
+    await querryBuilder("product").where("idProduct", id).update(updateInfo);
+    return "product updated"
   }
   static async postImageOfProductService(req) {
     try {

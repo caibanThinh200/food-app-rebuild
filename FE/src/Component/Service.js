@@ -15,7 +15,7 @@ function About(props) {
 
       <div className="featurette-row container">
         <div className="row heading-row ">
-          <div className="card-container col-md-4">
+          <div className="card-container  col-md-4">
             <div className="card-box ">
               <div className="front textAlignCenter">
                 <img src={process.env.PUBLIC_URL + "/food.png"} />

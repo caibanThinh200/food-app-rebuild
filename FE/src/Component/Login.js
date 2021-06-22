@@ -49,12 +49,13 @@ function SignIn(props) {
     submitLogin,
   } = useContext(context);
   const location = useLocation();
-
+  const [disable, setDisable] = useState(true)
   return (
     <Modal
       title={props.title}
       visible={props.visible}
       onOk={props.handleOk}
+      footer={false}
       confirmLoading={props.confirmLoading}
       onCancel={props.handleCancel}
     >
@@ -63,44 +64,36 @@ function SignIn(props) {
         className="carousel slide"
         data-ride="carousel"
       >
-        <ol className="carousel-indicators">
-          Login
-          <li
-            data-target="#carouselExampleIndicators"
-            onClick={() => props.changeTextLogin()}
-            data-slide-to="1"
+        <div className="toggle-form">
+          <button
+            data-bs-target="#carouselExampleIndicators"
+            onClick={() => { props.changeTextLogin(); setDisable(!disable) }}
+            data-bs-slide-to="1"
             className="active"
-          ></li>
-          Sign up
-          <li
-            data-target="#carouselExampleIndicators"
-            onClick={() => props.changeTextRegister()}
-            data-slide-to="0"
-          ></li>
-        </ol>
+            disabled={disable}
+          >Login</button>
+          <button
+            data-bs-target="#carouselExampleIndicators"
+            onClick={() => { props.changeTextRegister(); setDisable(!disable) }}
+            data-bs-slide-to="0"
+            disabled={!disable}
+          >Register</button>
+        </div>
         <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img
-              style={{ width: "100px", height: "100px", marginLeft: "40%" }}
-              src={
-                process.env.PUBLIC_URL + "/[removal.ai]_tmp-601c00a249770.png"
-              }
-              alt="First slide"
-              width="30px"
-              height="30px"
-            />
+          <div className="carousel-item">
             <h1 className="user-title">Register User</h1>
             <div className="register-form">
-              <Input
-                name="fullname"
-                onChange={(e) => {
-                  onChangeFullName(e);
-                }}
-                type="text"
-                placeholder="Nhập họ tên ..."
-              />
-
-              <Space className="birth_select" direction="horizontal">
+              <div className="form-item">
+                <Input
+                  name="fullname"
+                  onChange={(e) => {
+                    onChangeFullName(e);
+                  }}
+                  type="text"
+                  placeholder="Nhập họ tên ..."
+                />
+              </div>
+              <div className="form-item">
                 <DatePicker
                   onChange={(e) => {
                     onChangeBirth(e);
@@ -108,101 +101,103 @@ function SignIn(props) {
                   className="date_picker"
                   placeholder="Chọn ngày sinh ..."
                 />
-              </Space>
-              <br />
-
-              <Input
-                onChange={(e) => {
-                  onChangePhoneNum(e);
-                }}
-                placeholder="Nhập số điện thoại ..."
-              />
-
-              <Input
-                onChange={(e) => {
-                  onChangeAddress(e);
-                }}
-                placeholder="Nhập địa chỉ ..."
-              />
-
-              <Input
-                onChange={(e) => {
-                  onChangeMail(e);
-                }}
-                placeholder="Nhập email ..."
-              />
-
-              <Input
-                onChange={(e) => {
-                  onChangeUsername(e);
-                }}
-                placeholder="Nhập tên người dùng ..."
-              />
-
-              <Input
-                onChange={(e) => {
-                  onChangePassword(e);
-                }}
-                type="password"
-                placeholder="Nhập mật khẩu ..."
-              />
-              <br />
-
-              <Button
+              </div>
+              <div className="form-item">
+                <Input
+                  onChange={(e) => {
+                    onChangePhoneNum(e);
+                  }}
+                  placeholder="Nhập số điện thoại ..."
+                />
+              </div>
+              <div className="form-item">
+                <Input
+                  onChange={(e) => {
+                    onChangeAddress(e);
+                  }}
+                  placeholder="Nhập địa chỉ ..."
+                />
+              </div>
+              <div className="form-item">
+                <Input
+                  onChange={(e) => {
+                    onChangeMail(e);
+                  }}
+                  placeholder="Nhập email ..."
+                />
+              </div>
+              <div className="form-item">
+                <Input
+                  onChange={(e) => {
+                    onChangeUsername(e);
+                  }}
+                  placeholder="Nhập tên người dùng ..."
+                />
+              </div>
+              <div className="form-item">
+                <Input
+                  onChange={(e) => {
+                    onChangePassword(e);
+                  }}
+                  type="password"
+                  placeholder="Nhập mật khẩu ..."
+                />
+              </div>
+              <button
                 onClick={(e) => {
                   submitData(e);
                 }}
-                type="primary"
+                className="bg-warning"
               >
                 Register
-              </Button>
+              </button>
             </div>
           </div>
-          <div className="carousel-item">
-            <img
-              style={{ width: "100px", height: "100px", marginLeft: "40%" }}
-              src={
-                process.env.PUBLIC_URL + "/[removal.ai]_tmp-601c00a249770.png"
-              }
-              alt="First slide"
-              width="30px"
-              height="30px"
-            />
+          <div className="carousel-item active">
             <h1 className="user-title">Login User</h1>
             <div className="register-form">
+              <div className="form-item">
               <Input
+                size="large"
                 onChange={(e) => {
                   onChangeUsername(e);
                 }}
                 placeholder="Nhập tên người dùng ..."
               />
 
-              <Input
+              </div>
+             <div className="form-item">
+             <Input
+                size="large"
                 onChange={(e) => {
                   onChangePassword(e);
                 }}
                 type="password"
                 placeholder="Nhập mật khẩu ..."
               />
-              <br />
-
-              <Button
+             </div>
+             {errorLogin && (
+                <div className="alert-errors">
+                  <Alert
+                    message="Invalid username or password"
+                    type="error"
+                    showIcon
+                  />
+                </div>
+              )}
+             <div className="form-item" style={{width: '100%'}}>
+             <button
                 onClick={(e) => {
                   submitLogin(e);
                   props.disable();
                 }}
-                type="primary"
+                style={{borderRadius:'5px', margin:'0 auto', marginTop:'10px'}}
+                className="bg-warning"
               >
                 Login
-              </Button>
-              {errorLogin && (
-                <Alert
-                  style={{ width: "70%", margin: "30px 60px" }}
-                  message="Invalid username or password"
-                  type="error"
-                  showIcon
-                />
-              )}
+              </button>
+             </div>
+
             </div>
           </div>
         </div>

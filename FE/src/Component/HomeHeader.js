@@ -28,7 +28,6 @@ function HomeHeader(props) {
       let description = `<h1>Request a ride now</h1><br/>
             <h4>Greater transparency for shippers and carriers to do business together.</h4>
             <button className="btn btn-primary">Book now</button>`;
-
       descrip.innerHTML = description;
     }
   };
@@ -81,28 +80,6 @@ function HomeHeader(props) {
   return (
     <div className="head-container container-fluid">
       <div className="row">
-        <div className="col-12 ">
-          <div className="container part-1">
-            <div className="row">
-              <div className="col-lg-7">
-                  <div className="header-title">
-                    <h1>Helping to keep each other safe</h1>
-                    <h4>
-                      We’re actively monitoring the COVID-19 situation and are
-                      continually working to help keep those who rely on our platform
-                      healthy and safe.
-                    </h4>
-                  </div>
-              </div>
-              <div className="col-lg-5 ">
-                <div className="header-description">
-                </div>
-              </div>
-            </div>
-          </div>          
-        </div>
-      </div>
-      <div className="row">
         <div className="col-12" style={{padding:'0'}}>
           <div className="header-content">
             <div className="header-image">
@@ -110,7 +87,7 @@ function HomeHeader(props) {
             </div>
 
             <div className="header-image">
-              <img src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_637/v1571089524/assets/86/deebcb-1975-4c81-96b7-7b126fe2f0f3/original/UberEatsOffers.png" />
+              <img src="https://mcdonalds.vn/uploads/2018/news/1-1.jpg"/>
             </div>
 
             <div className="header-image">
@@ -151,6 +128,56 @@ function HomeHeader(props) {
             </Group>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row advertise">
+        <div className="container">
+          <div className="row">
+          <div className="col-md-6">
+          <div className="card">
+            <img style={{height:'410px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/mccafe_desktop.jpg" alt=""/>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="row" style={{padding:'0'}}>
+            <div className="col-6">
+              <div className="card">
+                <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/hr-pc.jpg" alt=""/>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="card">
+                <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/news/_BTS_POShcm.png" alt=""/>
+              </div>
+            </div>
+            <div className="col-12" style={{padding:'10px'}}>
+              <div className="card">
+              <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/home-banner-hamburger.jpg" alt=""/>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+        <div className="col-12 ">
+          <div className="container part-1">
+            <div className="row">
+              <div className="col-lg-7">
+                  <div className="header-title">
+                    <h1>Helping to keep each other safe</h1>
+                    <h4>
+                      We’re actively monitoring the COVID-19 situation and are
+                      continually working to help keep those who rely on our platform
+                      healthy and safe.
+                    </h4>
+                  </div>
+              </div>
+              <div className="col-lg-5 ">
+                <div className="header-description">
+                </div>
+              </div>
+            </div>
+          </div>          
         </div>
       </div>
     </div>

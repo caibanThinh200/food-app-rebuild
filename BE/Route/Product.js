@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
         cb(null,"./images/");
     },
     filename:(req,file,cb)=>{
-        cb(null,new Date().toISOString().replace(/:/g, '-') + file.originalname)
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname.includes("jfif") ? file.originalname.replace("jfif", "png") : file.originalname)
     }
 })
 const upload = multer({storage:storage});
@@ -21,6 +21,5 @@ route.post("/images",upload.single("image"),ProductController.postImageOfProduct
 route.get("/images/:id",ProductController.getImagesOfProductController);
 route.put("/submit",ProductController.increaseProductController);
 route.get("/b/bestSaled",ProductController.getProductBestSaledController);
-route.put("/:id",upload.single("image"),ProductController.updateProductController)
-
+route.put("/:id", upload.single("image"), ProductController.updateProductController);
 module.exports = route;

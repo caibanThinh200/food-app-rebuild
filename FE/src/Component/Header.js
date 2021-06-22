@@ -16,7 +16,7 @@ import {
   LogoutOutlined,
   MoneyCollectFilled,
 } from "@ant-design/icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, Fragment } from "react";
 import { context } from "../Context/Context";
 import Item from "antd/lib/list/Item";
 import Login from "./Login";
@@ -48,37 +48,42 @@ function Header(props) {
     handleOk,
     onChangeSearch,
     searchAction,
+    tokenLocal,
+    token,
+    setToken,
+    getUserInfo,
+    userInf,
+    setUserInf
   } = useContext(context);
 
-  const [userInf, setUserInf] = useState([]);
-  const token = JSON.parse(localStorage.getItem("token")) || "";
 
-  const { isExpired, decodedToken } = useJwt(token.token);
-
-  const getUserInfo = () => {
-    //console.log(isExpired);
-    if (token) {
-      if (!isExpired) {
-        fetch(API_URL + "/User/s/userprofile", {
-          headers: {
-            Authorization: "Bearer " + token.token,
-          },
-        })
-          .then((res) => res.json())
-          .then((json) => setUserInf(json));
-      } else if (isExpired) {
-        alert("Token expired,please login again");
-        showModal();
-      }
-    }
-  };
-
+  //const token = JSON.parse(localStorage.getItem("token")) || "";
+  const { isExpired, decodedToken } = useJwt(tokenLocal);
+  
+  // const getUserInfo = () => {
+  //   //console.log(isExpired);
+  //   if (token) {
+  //     if (!isExpired) {
+  //       fetch(API_URL + "/User/s/userprofile", {
+  //         headers: {
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       })
+  //         .then((res) => res.json())
+  //         .then((json) => setUserInf(json));
+  //     } else if (isExpired) {
+  //       alert("Token expired,please login again");
+  //       showModal();
+  //     }
+  //   }
+  // };
   const disable = () => {
     setVisible(false);
   };
   const logout = () => {
     localStorage.removeItem("token");
-    setUserInf([]);
+    setToken("");
+    setUserInf({});
     notification.open({
       message: "Logout",
       description: "You have logout",
@@ -96,13 +101,15 @@ function Header(props) {
     getProduct();
   }, []);
   useEffect(() => {
-    getUserInfo();
-  }, [token.token]);
+    if (tokenLocal.token !== "") {
+      getUserInfo();
+    }
+  }, [tokenLocal.token]);
 
   const menu = (id) => (
     <Menu style={{ width: "100px" }}>
       <Menu.Item key="1" icon={<UserOutlined />}>
-        <Link to={"profile/" + id}>Profile</Link>
+        <Link to={"/profile/" + id}>Profile</Link>
       </Menu.Item>
       <Menu.Item key="2" icon={<MoneyCollectFilled />}>
         <Link to={"/bill"}>List bill</Link>
@@ -112,73 +119,87 @@ function Header(props) {
       </Menu.Item>
     </Menu>
   );
-  return (
-    <nav className="nav-menu">
-      <img
-        id="uber-logo"
-        src={process.env.PUBLIC_URL + "/[removal.ai]_tmp-601c00a249770.png"}
-      />
-      <Link className="link" to="/">
-        Home
-      </Link>
-      <Link className="link" to="/product">
-        Product
-      </Link>
-      <Link className="link" to="/cart">
-        Cart ({cart[0].length})
-      </Link>
-      <Link className="link" to="/about">
-        About
-      </Link>
-      <Link className="link" to="/contact">
-        Contact
-      </Link>
-      {
-        !isExpired && decodedToken && decodedToken.role === "admin" && <Link className="link" to="/admin" replace>
-            Admin
-        </Link>
-      }
 
-      {!isExpired ? (
-        <span style={{ marginLeft: "35%", width: "100px" }}>
-          {decodedToken && (
-            <Dropdown.Button
-              style={{ float: "right" }}
-              size="large"
-              overlay={menu(decodedToken.id)}
-              key={decodedToken.id}
-            >
-              Hello {decodedToken.username}
-            </Dropdown.Button>
-          )}
-        </span>
-      ) : (
-        <>
-          <Button
-            type="primary"
-            className="link"
-            style={{ float: "right" }}
-            onClick={showModal}
-          >
-            Don't have user? Click here
-          </Button>
-          <Login
-            changeTextRegister={() => changeTextRegister()}
-            changeTextLogin={() => changeTextLogin()}
-            visible={visible}
-            disable={() => disable()}
-            handleOk={handleOk}
-            confirmLoading={confirmLoading}
-            handleCancel={handleCancel}
-            title={modalText}
-          />
-        </>
-      )}
-      <div
-        style={{ marginRight: "30px", width: "300px", height: "100%" }}
-        className="floatLeft search-container"
-      ></div>
-    </nav>
+  return (
+    <div className="bg-dark">
+      <div className="nav-top">
+        <div className="d-flex">
+          <div>
+            <span><i class="fab fa-facebook-f"></i></span>
+            <span style={{borderLeft:'1px solid silver', borderRight:'1px solid silver'}}><i class="fab fa-instagram"></i></span>
+            <span><i class="fab fa-twitter"></i></span>
+          </div>
+          <p className="text-white store-address"><i class="fal fa-map-marker-alt" style={{ marginRight: '10px' }}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>
+        </div>
+      </div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-warning">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-3">
+              <Link className="navbar-brand" to="/"><img
+                id="uber-logo"
+                src={process.env.PUBLIC_URL + "/logo-food-app.jpg"}
+              />
+                <span id="logo-title">FoodApp</span>
+              </Link>
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon" />
+              </button>
+            </div>
+            <div className="col-lg-9" >
+              <div className="collapse navbar-collapse " id="navbar">
+                <div className="navbar-nav">
+                  <Link to="/" className="nav-link " aria-current="page" >Home</Link>
+                  <Link to="/product" className="nav-link " aria-current="page" >Product</Link>
+                  <Link to="/cart" className="nav-link " aria-current="page">Cart ({cart[0].length})</Link>
+                  <Link to="/" className="nav-link " aria-current="page" >About us</Link>
+                  <Link to="/" className="nav-link " aria-current="page" >Contact</Link>
+                  {
+                    tokenLocal && userInf && userInf?.role === "admin" && <Link className="nav-link active" to="/admin" replace>
+                      Admin page
+                    </Link>
+                  }
+                </div>
+                {tokenLocal.token && isExpired ? (
+                  <span style={{ marginLeft: "35%", width: "100px" }}>
+                    {userInf && (
+                      <Dropdown.Button
+                        style={{ float: "right" }}
+                        size="large"
+                        overlay={menu(userInf.UserId)}
+                        key={userInf.UserId}
+                      >
+                        Hello {userInf.Fullname}
+                      </Dropdown.Button>
+                    )}
+                  </span>
+                ) : (
+                    <>
+                      <button
+                        className="link bg-danger"
+                        onClick={showModal}
+                      >
+                        Login now
+                    </button>
+                      <Login
+                        changeTextRegister={() => changeTextRegister()}
+                        changeTextLogin={() => changeTextLogin()}
+                        visible={visible}
+                        disable={() => disable()}
+                        handleOk={handleOk}
+                        confirmLoading={confirmLoading}
+                        handleCancel={handleCancel}
+                        title={modalText}
+                      />
+                    </>
+                  )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
   );
 }
 export default Header;

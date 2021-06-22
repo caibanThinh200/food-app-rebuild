@@ -75,6 +75,7 @@ class UserService {
           const token = jwt.sign(
             {
               id: user.UserId,
+              phone: user.phoneNum,
               username: user.Username,
               fullname: user.Fullname,
               address: user.UserAddress,
@@ -83,7 +84,7 @@ class UserService {
               role: user.role
             },
             JWT_SECRET_KEY,
-            { expiresIn: 60 * 60 * 8 }
+            { expiresIn: 60 * 60 * 72 }
           );
 
           return { token: token };
@@ -148,10 +149,8 @@ class UserService {
   }
   static async changeAvatarService(req, res, next) {
     try {
-      const avatar = req.file.filename;
-
-      await querryBuilder("users").update("avatar", avatar);
-
+      const avatar = req.file ? req.file.filename : "";
+      await querryBuilder("users").update({avatar}); 
       return "Uploaded ";
     } catch (e) {
       console.log(e);

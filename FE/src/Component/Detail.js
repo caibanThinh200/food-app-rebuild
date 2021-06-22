@@ -2,9 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { context } from "../Context/Context";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Tag } from "antd";
+import {Swiper, SwiperSlide} from 'swiper/react'
 
 const Detail = (props) => {
-  const { API_URL, isLoading, setIsLoading, addCart } = useContext(context);
+  const { API_URL, isLoading, setIsLoading, addCart, getDetailProduct} = useContext(context);
 
   const { id } = useParams();
 
@@ -31,44 +33,60 @@ const Detail = (props) => {
       .then((json) => setImages(json.data));
   };
   useEffect(() => {
+    getDetail();
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    getDetail();
+    getDetailProduct(id);
+    getDetail()
     getListImages();
     console.log(images);
   }, []);
   useEffect(() => {
     getCate();
-  });
-
+  },[JSON.stringify(cate)]);
+  
   if (isLoading) {
     return <div className="loading">loading......</div>;
   } else {
     return (
-      <main className="container">
-        <Link style={{ width: "100px" }} to="/product">
-          Go back
-        </Link>
-        {detail.map(({ idProduct, nameFood, image, price, count }) => (
+      <main className="container" id="detail-page" style={{minHeight:'60vh'}}>
+        {detail.map(({ idProduct, nameFood, image, price, foodAddress }) => (
           <div className="container" key={idProduct}>
-            <div className="left-column">
-              <img
-                className="main-img"
-                src={API_URL + "/images/" + image}
-                alt=""
-              />
-              <div className="product-list-image">
-                {images.length > 0 &&
-                  images.map(({ id, image }) => (
-                    <img
-                      key={id}
-                      src={API_URL + "/images/" + image}
-                    />
-                  ))}
+            <div className="row">
+              <div>
+              <Link id="go-back" style={{ width: "100px" }} to="/product">
+                <button><i class="fas fa-long-arrow-left"></i>Go back</button>
+              </Link>
               </div>
             </div>
-            <div className="right-column">
+            <div className="row">
+              <div className="col-md-6">
+                <img
+                  className="main-img"
+                  src={API_URL + "/images/" + image}
+                  alt=""
+                />
+                <div className="container">
+                  <Swiper
+                    slidesPerView={4}
+                    spaceBetween={100}
+                  >
+                    {images.length > 0 &&
+                    images.map(({ id, image }) => (
+                      <SwiperSlide>
+                        <img
+                        className="product-list-image mr-5"
+                        key={id}
+                        src={API_URL + "/images/" + image}
+                      />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  
+                </div>
+              </div>
+              <div className="col-md-6">
               {/* Product Description */}
               <div className="product-description">
                 {cate.length > 0 &&
@@ -76,6 +94,7 @@ const Detail = (props) => {
                     <span key={idCategory}>{nameCategory}</span>
                   ))}
                 <h1>{nameFood}</h1>
+                  {foodAddress > 0 && <Tag color="#f50" style={{color:'white', marginBottom:'20px'}}>Sale off {foodAddress} %</Tag>}
                 <p>
                   The preferred choice of a vast range of acclaimed DJs. Punchy,
                   bass-focused sound and high isolation. Sturdy headband and
@@ -90,7 +109,15 @@ const Detail = (props) => {
               </div>
               {/* Product Pricing */}
               <div className="product-price">
-                <span>{price}$</span>
+              {foodAddress == 0?
+                        <div className="mt-3">
+                        <span className="mb-0">{new Intl.NumberFormat().format(price*(100 - foodAddress)/100)} VND</span>
+                        </div>
+                      :<div className="d-flex mt-3">
+                        <h6 className="old-price">{new Intl.NumberFormat().format(price)}</h6>
+                        <span className="mb-0 text-danger">{new Intl.NumberFormat().format(price*(100 - foodAddress)/100)} VND</span>
+                      </div>
+                    }
                 <a
                   href="#"
                   onClick={() => {
@@ -102,9 +129,9 @@ const Detail = (props) => {
                 </a>
               </div>
             </div>
+            </div>
           </div>
         ))}
-
         {/* Right Column */}
       </main>
     );

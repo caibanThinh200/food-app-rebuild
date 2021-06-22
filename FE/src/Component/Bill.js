@@ -37,7 +37,7 @@ const Bill = (props) => {
             {created_at}
           </Descriptions.Item>
 
-          <Descriptions.Item label="Total">{total}$</Descriptions.Item>
+          <Descriptions.Item label="Total">{new Intl.NumberFormat().format(total)} VND</Descriptions.Item>
         </Descriptions>
       </PageHeader>
     </div>

@@ -10,6 +10,8 @@
     width: 100%;
     min-height: 100vh;
     padding-top: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
     background-color: #eee;
 }
 .menu-admin{
@@ -65,7 +67,10 @@
     margin-bottom: 0;
     font-size: 20px;
 }
-
+#detail-address{
+    border-bottom: 1px solid #eee;
+    padding-bottom: 14px;
+}
 #detail-cate{
     margin: 7px 0;
     padding: 5px 13px;
@@ -109,4 +114,40 @@
 }
 .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
     background-color: black;
+}
+.chart-item{
+    width: 100%;
+    border-radius: 4px;
+    padding: 18px 15px;
+    height: 140px;
+}
+.chart-item i{
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.table-image{
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+}
+.chart-component .col-3{
+    padding: 10px;
+}
+.btn-edit-food{
+    border-style: none;
+    border-radius: 4px;
+    color: white;
+    background-color: orange;
+    height: 38px;
+    padding: 2px 20px;
+}
+.nav-top{
+    padding: 6px 15px;
+}
+.nav-top p{
+    margin-bottom: 0;
+}
+h4 span.small{
+    font-size: 14px;
 }

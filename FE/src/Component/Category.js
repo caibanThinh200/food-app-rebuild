@@ -61,7 +61,11 @@ function Category(props) {
               >
                 <img
                   className="logo"
+<<<<<<< HEAD
                   src={ API_URL + "/images/" + value.icon}
+=======
+                  src={`${API_URL}/images/` + value.icon}
+>>>>>>> Danny
                 />
                 <br />
                 <p>{value.nameCategory}</p>

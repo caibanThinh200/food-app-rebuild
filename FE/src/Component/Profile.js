@@ -1,8 +1,8 @@
 import { Button, Layout, Modal, Upload, message } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../Context/Context";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -32,44 +32,38 @@ const Profile = () => {
   const { API_URL } = useContext(context);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
+  console.log(imageURL);
   const getUserInfoByParam = () => {
     fetch(API_URL + "/User/" + id)
       .then((res) => res.json())
       .then((json) => setUser(json.data));
   };
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) => {
-        setImage(info.file.originFileObj);
-
-        setImageName(info.file.name);
-        setImageURL(imageUrl);
-        setLoading(false);
-      });
-    }
+  const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
   const showModal = () => {
     setModal(true);
   };
   const handleOk = async () => {
-    console.log(image);
     const form = new FormData();
-
-    form.append("file", image);
-
+    form.append("file", imageURL, imageURL.name);
+    form.forEach(element => {
+      console.log(element);
+    });
     axios
       .put(API_URL + "/User/profile/" + id, form, {
         header: {
@@ -77,6 +71,8 @@ const Profile = () => {
         },
       })
       .then((res) => {
+        getUserInfoByParam();
+        setImageURL("");
         console.log(res);
       });
     setModal(false);
@@ -84,14 +80,17 @@ const Profile = () => {
   };
   const handleCancel = () => {
     setModal(false);
+    setImageURL("")
   };
+  useEffect(()=>{
 
+  },[localStorage.getItem("token")])
   useEffect(() => {
     getUserInfoByParam();
-  }, [user]);
-
+  }, [JSON.stringify(user)]);
+  if(localStorage.getItem("token"))
   return (
-    <div className=" emp-profile">
+    <div className="container emp-profile">
       {id ? (
         user.map(
           ({
@@ -106,208 +105,100 @@ const Profile = () => {
             Created_at,
             avatar,
           }) => (
-            <form style={{ marginLeft: "10%" }} key={UserId} method="post">
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="profile-head">
-                    <div className="profile-head profile-title ">
+              <form className="container-fluid" key={UserId} method="post">
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="profile-head">
                       <div
-                        style={{ width: "40%", height: "200px" }}
-                        className="profile-img floatLeft"
+                        className="profile-img"
                       >
                         <img
-                          style={{ width: "100%", height: "100%" }}
-                          src={"http://localhost:3010/images/" + avatar}
+                          src={API_URL + "/images/" + avatar}
                         />
+                        <div className="btn-avatar-container">
+                        <h3 style={{margin:'20px 0'}}>{Fullname}</h3>
                         <Button
-                          style={{ margin: "30px 80px" }}
                           onClick={() => {
                             showModal();
                           }}
-                          type="primary"
+                          type="default"
                         >
                           Change photo
                         </Button>
+                        </div>
                         <Modal
-                          style={{ marginTop: "300px" }}
                           visible={modal}
                           onOk={handleOk}
                           onCancel={handleCancel}
                         >
-                          <Upload
-                            name="file"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            method="POST"
-                            beforeUpload={beforeUpload}
-                            onChange={handleChange}
-                          >
-                            {imageURL ? (
-                              <img
-                                src={imageURL}
-                                alt="avatar"
-                                style={{ width: "100%" }}
-                              />
-                            ) : (
-                              uploadButton
-                            )}
-                          </Upload>
+                          <input type="file" onChange={(e) => setImageURL(e.target.files[0])} />
+                          {imageURL && imageURL.name}
                         </Modal>
                       </div>
-
-                      <h5>{Fullname}</h5>
                     </div>
-                    <div className="clear-both"></div>
-                    <ul className=" nav-tabs" id="myTab" role="tablist">
-                      <li className="nav-item floatLeft">
-                        <a
-                          className="nav-link active"
-                          id="home-tab"
-                          data-toggle="tab"
-                          href="#home"
-                          role="tab"
-                          aria-controls="home"
-                          aria-selected="true"
-                        >
-                          About
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
-                          id="profile-tab"
-                          data-toggle="tab"
-                          href="#profile"
-                          role="tab"
-                          aria-controls="profile"
-                          aria-selected="false"
-                        >
-                          Timeline
-                        </a>
-                      </li>
-                    </ul>
                   </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-8">
-                  <div className="tab-content profile-tab" id="myTabContent">
-                    <div
-                      className="tab-pane fade show active"
-                      id="home"
-                      role="tabpanel"
-                      aria-labelledby="home-tab"
-                    >
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>User Id</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>{UserId}</p>
-                        </div>
+                  <div className="col-md-8 bg-light">
+                    <div className="customer-infor p-2">
+                      <h4>Customer Information</h4>
+                      <h5 id="email"><span className="text-primary">({Gmail})</span></h5>
+                      <div className="alert alert-secondary mt-3" role="alert">
+                          Create at: {Created_at}
                       </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Name</label>
+                      <div>
+                        <div className="user-infor">
+                          <div className="row">
+                            <div className="col-3">
+                              <h5>Fullname:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{Fullname}</h5>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-md-6">
-                          <p>{Fullname}</p>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Phone number:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>0{phoneNum}</h5>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Email</label>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Address:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{UserAddress}</h5>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <p>{Gmail}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Phone</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>{phoneNum}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Profession</label>
-                        </div>
-                        <div className="col-md-4">
-                          <p>Web Developer and Designer</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="profile"
-                      role="tabpanel"
-                      aria-labelledby="profile-tab"
-                    >
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Experience</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Hourly Rate</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>10$/hr</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Total Projects</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>230</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>English Level</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Availability</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>6 months</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <label>Your Bio</label>
-                          <br />
-                          <p>Your detail description</p>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Birthdate:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{Birth}</h5>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          )
+              </form>
+            )
         )
       ) : (
-        <div>
-          <h1>You have logout , please sign in</h1>
-        </div>
-      )}
+          <div>
+            <h1>You have logout , please sign in</h1>
+          </div>
+        )}
     </div>
   );
+  else return <Redirect to="/"/>
 };
 export default Profile;

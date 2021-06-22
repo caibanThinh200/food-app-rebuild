@@ -1,8 +1,11 @@
 const route = require("express").Router();
 const BillController = require("../Controller/BillController");
 route.post("/", BillController.addBillController);
+route.get("/", BillController.getAllBillController);
 route.get("/u/:id", BillController.showBillController);
 route.get("/p/:id", BillController.showProductInBillController);
-route.get("/:idBill", BillController.getBillController);
 route.delete("/:idBill", BillController.deleteBillController);
+route.post("/KPI", BillController.getKPIMonthController);
+route.get("/KPI", BillController.getMonthKPIByYearController);
+route.get("/:idBill", BillController.getBillController);
 module.exports = route;
