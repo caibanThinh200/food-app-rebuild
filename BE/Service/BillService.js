@@ -33,14 +33,13 @@ class BillService {
   }
   static async showListBillService(req, res, next) {
     try {
-      let userId = req.params.id;
+      let billId = req.params.idBill;
 
       let billData = await querryBuilder("Bill")
-        .where("idUser", userId)
+        .where("idBill", billId)
         .orderBy("created_at", "desc")
         .select();
       let bill = JSON.parse(JSON.stringify(billData));
-
       return bill;
     } catch (e) {
       console.log(e);
@@ -113,6 +112,15 @@ class BillService {
       await querryBuilder("KPI").insert(insertData);
       return "KPI updated";
     } catch (e) {
+      console.log(e);
+    }
+  }
+  static async GetAllMonthKPIYearService(req, res, next) {
+    try {
+      const { year } = req.query;
+      const data = await querryBuilder("KPI").where("year", year).select();
+      return data
+    } catch(e) {
       console.log(e);
     }
   }
