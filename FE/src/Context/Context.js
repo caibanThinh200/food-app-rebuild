@@ -243,8 +243,13 @@ export const ContextProvider = (props) => {
     fetch(API_URL + "/Home")
       .then((res) => res.json())
       .then((json) => {
+<<<<<<< HEAD
         const productList = new ProductListModel(json).getListProduct();
         setProduct(productList.result);
+=======
+        const productList = new ProductListModel(json).getListProduct().result;
+        setProduct(productList);
+>>>>>>> 47904e49cbe77e9543a6f9e403ee6c02d0055996
         setIsLoading(false);
       });
   };
@@ -285,6 +290,7 @@ export const ContextProvider = (props) => {
   };
   //HInh ben may NC roi nen ko co, m vua lam gi ma no co data vaym ghi localhost thua dau / t goi api co dau /roingon
   //Cart
+  console.log(product);
   const checkDuplicateProduct = (pos) => {
     notification.open({
       message: "Duplicate product",
@@ -295,13 +301,12 @@ export const ContextProvider = (props) => {
   const [count, setCount] = useState(1);
 
   const addCart = (id) => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
+    if (tokenLocal) {
       const check = cart.every((item) => {
         return item.idProduct !== id;
       });
-
       if (check) {
+        console.log(product);
         const cart_product = product.filter((product) => {
           return product.idProduct === id;
         });

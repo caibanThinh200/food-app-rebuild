@@ -146,7 +146,7 @@ function Header(props) {
                   <Link to="/" className="nav-link " aria-current="page" >About us</Link>
                   <Link to="/" className="nav-link " aria-current="page" >Contact</Link>
                   {
-                    token && !isExpired && userInf && userInf?.role === "admin" && <Link className="nav-link active" to="/admin" replace>
+                    tokenLocal && userInf && userInf?.role === "admin" && <Link className="nav-link active" to="/admin" replace>
                       Admin page
                     </Link>
                   }

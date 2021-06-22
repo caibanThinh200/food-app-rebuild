@@ -7,12 +7,12 @@ import create from "@ant-design/icons/lib/components/IconFont";
 import { useJwt } from "react-jwt";
 
 const ListBill = (props) => {
-  const { API_URL, token, getBillAndUser, userId, userInfo, bill } = useContext(context);
+  const { API_URL, token, getBillAndUser, userId, userInf, bill } = useContext(context);
 
   useEffect(() => {
     getBillAndUser();
-  }, [JSON.stringify(userInfo)]);
-  console.log(userInfo)
+  }, [JSON.stringify(userInf)]);
+
   return (
     <div style={{marginBottom:'50px'}}>
       <div
@@ -29,7 +29,7 @@ const ListBill = (props) => {
             created_at={created_at}
             note={note}
             total={total}
-            fullname={userInfo.Fullname}
+            fullname={userInf.Fullname}
           />
         ))
       ) : (

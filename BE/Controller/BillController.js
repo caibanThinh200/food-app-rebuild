@@ -131,7 +131,26 @@ class BillController {
         data: null,
         error: {
           code: 1000,
-          message: "insert bill failed",
+          message: "insert KPI failed",
+        },
+      });
+    }
+  }
+  static async getMonthKPIByYearController(req, res, next) {
+    try {
+      let data = await BillService.GetAllMonthKPIYearService(req);
+      res.status(200).json({
+        status: "SUCCESS",
+        data,
+        error: null,
+      });
+    } catch(e) {
+      res.status(200).json({
+        status: "FAILED",
+        data: null,
+        error: {
+          code: 1000,
+          message: "get KPI failed",
         },
       });
     }
