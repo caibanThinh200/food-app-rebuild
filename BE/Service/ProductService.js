@@ -89,6 +89,20 @@ class ProductService {
       console.log(e);
     }
   }
+  static async updateProductService(req, res, next) {
+    let { id } = req.params;
+    const data = req.body;
+    const filename = req.file ? req.file.filename : "";
+    const updateInfo = {
+      idCategory: data.idCate,
+      nameFood: data.nameFood,
+      price: data.price,
+      foodAddress: data.address,
+      image: filename,
+    }
+    await querryBuilder("product").where("idProduct", id).update(updateInfo);
+    return "product updated"
+  }
   static async postImageOfProductService(req) {
     try {
       let data = req.body;
