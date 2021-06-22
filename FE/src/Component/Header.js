@@ -58,7 +58,7 @@ function Header(props) {
 
   
   //const token = JSON.parse(localStorage.getItem("token")) || "";
-  const { isExpired, decodedToken } = useJwt(token);
+  const { isExpired, decodedToken } = useJwt(tokenLocal);
   
   // const getUserInfo = () => {
   //   //console.log(isExpired);
@@ -151,7 +151,7 @@ function Header(props) {
                     </Link>
                   }
                 </div>
-                {tokenLocal.token ? (
+                {tokenLocal.token && isExpired ? (
                   <span style={{ marginLeft: "35%", width: "100px" }}>
                     {userInf && (
                       <Dropdown.Button

@@ -285,7 +285,6 @@ export const ContextProvider = (props) => {
   };
   //HInh ben may NC roi nen ko co, m vua lam gi ma no co data vaym ghi localhost thua dau / t goi api co dau /roingon
   //Cart
-  console.log(product);
   const checkDuplicateProduct = (pos) => {
     notification.open({
       message: "Duplicate product",
@@ -449,8 +448,10 @@ export const ContextProvider = (props) => {
   const [loadingBill, setLoadingBill] = useState(false);
 
   const getBillAndUser = () => {
+    console.log(userInf)
     if (userInf) {
-      axios.get(API_URL + "/Bill/u/" + userInf.UserId).then((res) => {
+      axios.get(DEV_URL + "/Bill/u/" + userInf.UserId).then((res) => {
+        console.log(res)
         setBill(new ListBillModel(res.data.data).getListBill().result);
       });
     }

@@ -8,7 +8,7 @@ import { useJwt } from "react-jwt";
 
 const ListBill = (props) => {
   const { API_URL, token, getBillAndUser, userId, userInf, bill } = useContext(context);
-
+  console.log(bill);
   useEffect(() => {
     getBillAndUser();
   }, [JSON.stringify(userInf)]);
