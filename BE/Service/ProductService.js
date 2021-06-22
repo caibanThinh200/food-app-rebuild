@@ -98,7 +98,9 @@ class ProductService {
       nameFood: data.nameFood,
       price: data.price,
       foodAddress: data.address,
+      description: data.description,
       image: filename,
+      updated_at: new Date()
     }
     await querryBuilder("product").where("idProduct", id).update(updateInfo);
     return "product updated"
