@@ -150,7 +150,7 @@ function ProductList(props) {
       <Swiper
         className="mySwiper container"
         slidesPerView={4}
-        spaceBetween={20}
+        spaceBetween={10}
         breakpoints={{
           640: {
             slidesPerView: 4,
