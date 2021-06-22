@@ -1434,7 +1434,7 @@ img{
 
 .nav-top i{
   color: white;
-  margin-right: 15px;
+  padding: 0 10px;
   font-size: 15px;
 }
 .nav-top div.d-flex{

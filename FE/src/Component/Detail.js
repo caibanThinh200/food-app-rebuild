@@ -44,7 +44,7 @@ const Detail = (props) => {
   useEffect(() => {
     getCate();
   },[JSON.stringify(cate)]);
-
+  
   if (isLoading) {
     return <div className="loading">loading......</div>;
   } else {
@@ -67,13 +67,13 @@ const Detail = (props) => {
                   alt=""
                 />
                 <div className="product-list-image">
-                  {/* {images.length &&
+                  {images.length &&
                     images.map(({ id, image }) => (
                       <img
                         key={id}
                         src={API_URL + "/images/" + image}
                       />
-                    ))} */}
+                    ))}
                 </div>
               </div>
               <div className="col-md-6">

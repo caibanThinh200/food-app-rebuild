@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, message, Select } from 'antd'
+import { Form, Input, InputNumber, Select, Modal } from 'antd'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -58,8 +58,12 @@ const AddProduct = () => {
         axios.post(API_URL + "/Home", forms)
         .then(res => {
             console.log(res);
-            message.success("Thêm món ăn thành công")
-            form.setFieldsValue()
+            Modal.success(
+                {
+                    title: 'Add success',
+                    onOk(){window.location="/admin"}
+                }
+            )
         })
     }
     return (
@@ -84,8 +88,8 @@ const AddProduct = () => {
                             <Input name="nameFood" onChange={handleChange}/>
                         </Form.Item>
                         <Form.Item
-                            label="Food address"
-                            name="address"
+                            label="Description"
+                            name="description"
                             rules={[{ required: true, message: 'Please input your address!' }]}
                         >
                             <Input name="address" onChange={handleChange}/>

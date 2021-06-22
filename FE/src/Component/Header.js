@@ -126,7 +126,7 @@ function Header(props) {
         <div className="d-flex">
           <div>
             <span><i class="fab fa-facebook-f"></i></span>
-            <span><i class="fab fa-instagram"></i></span>
+            <span style={{borderLeft:'1px solid silver', borderRight:'1px solid silver'}}><i class="fab fa-instagram"></i></span>
             <span><i class="fab fa-twitter"></i></span>
           </div>
           <p className="text-white store-address"><i class="fal fa-map-marker-alt" style={{ marginRight: '10px' }}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>

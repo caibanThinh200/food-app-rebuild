@@ -118,8 +118,13 @@
 .chart-item{
     width: 100%;
     border-radius: 4px;
-    padding: 10px;
+    padding: 18px 15px;
     height: 140px;
+}
+.chart-item i{
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
 }
 .table-image{
     width: 100px;
@@ -142,4 +147,7 @@
 }
 .nav-top p{
     margin-bottom: 0;
+}
+h4 span.small{
+    font-size: 14px;
 }
