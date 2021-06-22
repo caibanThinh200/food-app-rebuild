@@ -243,13 +243,8 @@ export const ContextProvider = (props) => {
     fetch(API_URL + "/Home")
       .then((res) => res.json())
       .then((json) => {
-<<<<<<< HEAD
         const productList = new ProductListModel(json).getListProduct();
         setProduct(productList.result);
-=======
-        const productList = new ProductListModel(json).getListProduct().result;
-        setProduct(productList);
->>>>>>> 47904e49cbe77e9543a6f9e403ee6c02d0055996
         setIsLoading(false);
       });
   };

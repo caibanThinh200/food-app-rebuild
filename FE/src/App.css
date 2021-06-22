@@ -1432,3 +1432,15 @@ img{
 }
 
 
+.nav-top i{
+  color: white;
+  margin-right: 15px;
+  font-size: 15px;
+}
+.nav-top div.d-flex{
+  margin-left: 100px;
+  justify-content: space-between;
+}
+.nav-top .store-address{
+  margin-right: 40px;
+}

@@ -56,10 +56,10 @@ function Header(props) {
     setUserInf
   } = useContext(context);
 
-  
+
   //const token = JSON.parse(localStorage.getItem("token")) || "";
   const { isExpired, decodedToken } = useJwt(token);
-  
+
   // const getUserInfo = () => {
   //   //console.log(isExpired);
   //   if (token) {
@@ -101,7 +101,7 @@ function Header(props) {
     getProduct();
   }, []);
   useEffect(() => {
-    if(tokenLocal.token !== "") {
+    if (tokenLocal.token !== "") {
       getUserInfo();
     }
   }, [tokenLocal.token]);
@@ -122,7 +122,16 @@ function Header(props) {
 
   return (
     <div className="bg-dark">
-     <p style={{marginBottom:'0', padding: '7px 15px'}} className="text-white"><i class="fal fa-map-marker-alt" style={{marginRight:'10px'}}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>
+      <div className="nav-top">
+        <div className="d-flex">
+          <div>
+            <span><i class="fab fa-facebook-f"></i></span>
+            <span><i class="fab fa-instagram"></i></span>
+            <span><i class="fab fa-twitter"></i></span>
+          </div>
+          <p className="text-white store-address"><i class="fal fa-map-marker-alt" style={{ marginRight: '10px' }}></i>Address: 155 Sư Vạn Hạnh street Ho Chi Minh City</p>
+        </div>
+      </div>
       <nav className="navbar navbar-expand-lg navbar-light bg-warning">
         <div className="container-fluid">
           <div className="row">

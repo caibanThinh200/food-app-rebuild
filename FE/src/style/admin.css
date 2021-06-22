@@ -137,3 +137,9 @@
     height: 38px;
     padding: 2px 20px;
 }
+.nav-top{
+    padding: 6px 15px;
+}
+.nav-top p{
+    margin-bottom: 0;
+}
