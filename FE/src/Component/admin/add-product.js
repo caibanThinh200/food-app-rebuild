@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Select } from 'antd'
+import { Form, Input, InputNumber, message, Select } from 'antd'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -45,19 +45,21 @@ const AddProduct = () => {
     }
 
     const handleAddNewProduct = (value) => {
-        const form = new FormData();
+        const forms = new FormData();
         Object.entries(info).map(e => {
             if(e[0] === "image") {
-                form.append(e[0],e[1][0],e[1][1])
+                forms.append(e[0],e[1][0],e[1][1])
             }
             else {
-                form.append(e[0],e[1])
+                forms.append(e[0],e[1])
             }
         })
 
-        axios.post(API_URL + "/Home", form)
+        axios.post(API_URL + "/Home", forms)
         .then(res => {
             console.log(res);
+            message.success("Thêm món ăn thành công")
+            form.setFieldsValue()
         })
     }
     return (
