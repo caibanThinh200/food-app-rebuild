@@ -93,7 +93,7 @@ class BillService {
   }
   static async getAllBillService(req, res, next) {
     try {
-      let data = await querryBuilder("Bill").select();
+      let data = await querryBuilder("Bill").select().orderBy("created_at","desc");
       return data;
     } catch (e) {
       console.log(e);
