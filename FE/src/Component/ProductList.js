@@ -147,41 +147,42 @@ function ProductList(props) {
       <div className="voucher textAlignCenter">
         <h1>Best saled</h1>
       </div>
-      <div className="product-list">
-        {" "}
-        <section>
-          <div className="container">
-            <div className="row ">
-              <Swiper
-                className="mySwiper"
-                slidesPerView={4}
-                spaceBetween={10}
-                breakpoints={{
-                  640: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                  },
-                  768: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                  },
-                  1024: {
-                    slidesPerView: 6,
-                    spaceBetween: 60,
-                  },
-                }}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
+      <Swiper
+        className="mySwiper container"
+        slidesPerView={4}
+        spaceBetween={20}
+        breakpoints={{
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 6,
+            spaceBetween: 60,
+          },
+        }}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        <div className="product-list">
+          {" "}
+          <section>
+            <div className="container">
+              {" "}
+              <div className="row">
                 {!isLoading &&
                   bestSaled &&
-                  bestSaled.slice(0, 4).map((value, key) => (
+                  bestSaled.slice(0, 7).map((value, key) => (
                     <SwiperSlide>
                       <div>
                         <div
                           key={value.idProduct}
                           style={{ marginBottom: "100px" }}
-                          className="product-box"
+                          className="product-box col-12"
                         >
                           <div className="card-wrapper mb-4">
                             <div className="card-img">
@@ -246,11 +247,11 @@ function ProductList(props) {
                       </div>
                     </SwiperSlide>
                   ))}
-              </Swiper>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>{" "}
+      </Swiper>
     </div>
   );
 }

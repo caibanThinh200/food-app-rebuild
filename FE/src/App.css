@@ -996,11 +996,11 @@ th{
   
   
  .product-list-image{
-  
-    width:110%;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+
  }
- .product-list-image img{
+ .slide-image{
    margin-right: 5px;
    float: left;
    width:  20%;

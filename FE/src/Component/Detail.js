@@ -3,6 +3,7 @@ import { context } from "../Context/Context";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Tag } from "antd";
+import {Swiper, SwiperSlide} from 'swiper/react'
 
 const Detail = (props) => {
   const { API_URL, isLoading, setIsLoading, addCart, getDetailProduct} = useContext(context);
@@ -66,14 +67,23 @@ const Detail = (props) => {
                   src={API_URL + "/images/" + image}
                   alt=""
                 />
-                <div className="product-list-image">
-                  {images.length &&
+                <div className="container">
+                  <Swiper
+                    slidesPerView={4}
+                    spaceBetween={100}
+                  >
+                    {images.length > 0 &&
                     images.map(({ id, image }) => (
-                      <img
+                      <SwiperSlide>
+                        <img
+                        className="product-list-image mr-5"
                         key={id}
                         src={API_URL + "/images/" + image}
                       />
+                      </SwiperSlide>
                     ))}
+                  </Swiper>
+                  
                 </div>
               </div>
               <div className="col-md-6">
@@ -84,7 +94,7 @@ const Detail = (props) => {
                     <span key={idCategory}>{nameCategory}</span>
                   ))}
                 <h1>{nameFood}</h1>
-                  {foodAddress > 0&&<Tag color="#f50" style={{color:'white', marginBottom:'20px'}}>Sale off {foodAddress} %</Tag>}
+                  {foodAddress > 0 && <Tag color="#f50" style={{color:'white', marginBottom:'20px'}}>Sale off {foodAddress} %</Tag>}
                 <p>
                   The preferred choice of a vast range of acclaimed DJs. Punchy,
                   bass-focused sound and high isolation. Sturdy headband and
