@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { notification } from "antd";
 import axios from "axios";
-
+import { useJwt } from "react-jwt";
 import { SmileOutlined } from "@ant-design/icons";
 
 import Loading from "../Component/Loading";
 import { reduce } from "lodash";
+import AuthModel from "../Model/AuthModel";
+import ProductListModel from "../Model/ProductModel";
+import CategoryListModel from "../Model/CategoryModel";
+import ListBillModel from "../Model/BillModel";
+import UserModel from "../Model/UserModel";
 
 export const context = React.createContext();
 export const ContextProvider = (props) => {
   // const API_URL = "http://localhost:3010";
   const API_URL = "http://108.160.134.9:3010";
+  const DEV_URL = "http://localhost:3010";
   const [isLoading, setIsLoading] = useState(true);
+  const tokenLocal = JSON.parse(localStorage.getItem("token")) || "";
   //Register
 
   const [fullname, setFullname] = useState("");
@@ -168,15 +175,15 @@ export const ContextProvider = (props) => {
         onNotification(passwordNTF.message);
         break;
       default:
-        let dataUser = {
-          Fullname: fullname,
-          UserAddress: address,
-          Birth: birth,
-          Gmail: mail,
-          username: username,
-          pass: password,
-          PhoneNum: phoneNum,
-        };
+        let dataUser = new AuthModel({
+          fullname,
+          birth,
+          mail,
+          address,
+          phoneNum,
+          username,
+          password,
+        }).getData();
         setTimeout(() => {
           notification.open({
             message: "Register success",
@@ -200,15 +207,12 @@ export const ContextProvider = (props) => {
   const submitLogin = (e) => {
     e.preventDefault();
 
-    let dataUser = {
-      username: username,
-      pass: password,
-    };
+    let dataUser = new AuthModel({ username, password }).getData();
     //console.log(dataUser);
     axios.post(API_URL + "/User/login", dataUser).then((res) => {
-      console.log(res.data)
       if (res.data.token) {
         localStorage.setItem("token", JSON.stringify(res.data));
+        setToken(res.data.token);
         setVisible(false);
         notification.open({
           style: { marginTop: "100px" },
@@ -227,7 +231,9 @@ export const ContextProvider = (props) => {
   const getCate = () => {
     fetch(API_URL + "/Cate")
       .then((res) => res.json())
-      .then((json) => setCate(json));
+      .then((json) => {
+        setCate(new CategoryListModel(json).getListCategory().result);
+      });
   };
   //Product
   const [product, setProduct] = useState([]);
@@ -237,15 +243,17 @@ export const ContextProvider = (props) => {
     fetch(API_URL + "/Home")
       .then((res) => res.json())
       .then((json) => {
-        setProduct(json);
+        const productList = new ProductListModel(json).getListProduct();
+        setProduct(productList.result);
         setIsLoading(false);
       });
   };
   const getBestSaledProduct = () => {
+    setIsLoading(true);
     fetch(API_URL + "/Home/b/bestSaled")
       .then((res) => res.json())
       .then((json) => {
-        setBestSaled(json.data);
+        setBestSaled(new ProductListModel(json.data).getListProduct().result);
         setIsLoading(false);
       })
       .catch(() => {
@@ -270,9 +278,12 @@ export const ContextProvider = (props) => {
   const getDetailProduct = (id) => {
     fetch(API_URL + "/Home/idFood/" + id)
       .then((res) => res.json())
-      .then((json) => setDetail(json));
+      .then((json) => {
+        const product = new ProductListModel(json).getListProduct();
+        setDetail(product.result[0]);
+      });
   };
-//HInh ben may NC roi nen ko co, m vua lam gi ma no co data vaym ghi localhost thua dau / t goi api co dau /roingon
+  //HInh ben may NC roi nen ko co, m vua lam gi ma no co data vaym ghi localhost thua dau / t goi api co dau /roingon
   //Cart
   const checkDuplicateProduct = (pos) => {
     notification.open({
@@ -281,7 +292,7 @@ export const ContextProvider = (props) => {
     });
   };
   const [cart, setCart] = useState([]);
-  const [count,setCount] = useState(1);
+  const [count, setCount] = useState(1);
 
   const addCart = (id) => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -317,10 +328,12 @@ export const ContextProvider = (props) => {
   useEffect(() => {
     localStorage.setItem("dataCart", JSON.stringify(cart));
   }, [cart]);
+
   //navbar
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [userInf, setUserInf] = useState({});
   const [modalText, setModalText] = useState("Login");
 
   const showModal = () => {
@@ -339,6 +352,14 @@ export const ContextProvider = (props) => {
     setVisible(false);
   };
   const [productFilled, setProductFilled] = useState([]);
+  const [isLoadingResult, setIsLoadingResult] = useState(false);
+  const { isExpired, decodedToken, reEvaluateToken } = useJwt(token);
+
+  useEffect(() => {
+    reEvaluateToken(token);
+    console.log(decodedToken, isExpired);
+  }, [token]);
+
   const onChangeSearch = (e) => {
     if (e.target.value !== "") {
       setTimeout(() => {
@@ -360,24 +381,21 @@ export const ContextProvider = (props) => {
   };
 
   const searchAction = () => {
-    setIsLoading(true);
     const search_string = search.trim().toLowerCase();
-
-    if (search_string !== "") {
-      axios.get(API_URL + "/Home").then((res) => {
-        const result = res.data.filter((item) => {
-          return item.nameFood.toLowerCase().match(search_string);
-        });
-//thang NC dau no dang nen
-        setProduct(result);
-        setIsLoading(false);
-      });
-    } else {
-      setIsLoading(false);
-      notification.open({
-        message: "Please input saerch keyword",
-      });
-    }
+    setIsLoadingResult(true);
+    axios
+      .get(API_URL + "/Home")
+      .then((res) => {
+        if (search_string.length > 0) {
+          const result = res.data.filter((item) => {
+            return item.nameFood.toLowerCase().match(search_string);
+          });
+          const data = new ProductListModel(result).getListProduct();
+          setProductFilled(data.result);
+        }
+      })
+      .then(() => setIsLoadingResult(false))
+      .catch(() => setIsLoading(false));
   };
   const searchOnResult = (id) => {
     setIsLoading(true);
@@ -397,18 +415,56 @@ export const ContextProvider = (props) => {
     axios.get(API_URL + "/Home").then((res) => {
       if (search_string.length > 0) {
         const result = res.data.filter((item) => {
-          return item.nameFood.toLowerCase().match(search_string);
+          const data = item.nameFood.toLowerCase().match(search_string);
+          return new ProductListModel(data).getListProduct();
         });
+        console.log(result);
         setProductFilled(result);
       }
     });
   };
+  const getUserInfo = () => {
+    if (token || tokenLocal.token) {
+      console.log(decodedToken, isExpired);
+      if (!isExpired) {
+        fetch(API_URL + "/User/s/userprofile", {
+          headers: {
+            Authorization: "Bearer " + tokenLocal.token,
+          },
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            setUserInf(new UserModel(json[0]).getData());
+          });
+      } else if (isExpired) {
+        alert("Token expired,please login again");
+        showModal();
+      }
+    }
+  };
+
+  //Bill
+  const [bill, setBill] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [loadingBill, setLoadingBill] = useState(false);
+
+  const getBillAndUser = () => {
+    if (userInf) {
+      axios.get(API_URL + "/Bill/u/" + userInf.UserId).then((res) => {
+        setBill(new ListBillModel(res.data.data).getListBill().result);
+      });
+    }
+  };
+
   const store = {
     //constant state
     API_URL,
     isLoading,
     setIsLoading,
+    isLoadingResult,
+    setIsLoadingResult,
     //user state
+    tokenLocal,
     token,
     setToken,
     fullname,
@@ -468,6 +524,13 @@ export const ContextProvider = (props) => {
     showModal,
     handleCancel,
     handleOk,
+    getUserInfo,
+    //bill
+    getBillAndUser,
+    bill,
+    userInf,
+    setUserInf,
+    userId,
   };
 
   return (

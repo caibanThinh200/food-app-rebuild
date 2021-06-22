@@ -2,9 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import { context } from "../Context/Context";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Tag } from "antd";
 
 const Detail = (props) => {
-  const { API_URL, isLoading, setIsLoading, addCart } = useContext(context);
+  const { API_URL, isLoading, setIsLoading, addCart, getDetailProduct} = useContext(context);
 
   const { id } = useParams();
 
@@ -34,7 +35,8 @@ const Detail = (props) => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    getDetail();
+    getDetailProduct(id);
+    getDetail()
     getListImages();
     console.log(images);
   }, []);
@@ -47,7 +49,7 @@ const Detail = (props) => {
   } else {
     return (
       <main className="container" id="detail-page" style={{minHeight:'60vh'}}>
-        {detail.map(({ idProduct, nameFood, image, price, count }) => (
+        {detail.map(({ idProduct, nameFood, image, price, foodAddress }) => (
           <div className="container" key={idProduct}>
             <div className="row">
               <div>
@@ -81,6 +83,7 @@ const Detail = (props) => {
                     <span key={idCategory}>{nameCategory}</span>
                   ))}
                 <h1>{nameFood}</h1>
+                  {foodAddress > 0&&<Tag color="#f50" style={{color:'white', marginBottom:'20px'}}>Sale off {foodAddress} %</Tag>}
                 <p>
                   The preferred choice of a vast range of acclaimed DJs. Punchy,
                   bass-focused sound and high isolation. Sturdy headband and
@@ -95,7 +98,15 @@ const Detail = (props) => {
               </div>
               {/* Product Pricing */}
               <div className="product-price">
-                <span>{new Intl.NumberFormat().format(price)} VND</span>
+              {foodAddress == 0?
+                        <div className="mt-3">
+                        <span className="mb-0">{new Intl.NumberFormat().format(price*(100 - foodAddress)/100)} VND</span>
+                        </div>
+                      :<div className="d-flex mt-3">
+                        <h6 className="old-price">{new Intl.NumberFormat().format(price)}</h6>
+                        <span className="mb-0 text-danger">{new Intl.NumberFormat().format(price*(100 - foodAddress)/100)} VND</span>
+                      </div>
+                    }
                 <a
                   href="#"
                   onClick={() => {
@@ -110,7 +121,6 @@ const Detail = (props) => {
             </div>
           </div>
         ))}
-
         {/* Right Column */}
       </main>
     );

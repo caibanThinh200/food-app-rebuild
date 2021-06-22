@@ -321,7 +321,7 @@ th{
   margin-top: 20px;
 }
 .toggle-form button:disabled{
-  background-color: #ffc107;
+  background-color: #000;
   color: white;
   cursor: not-allowed;
 }
@@ -334,8 +334,23 @@ th{
   margin-bottom: 20px;
   width: 100%;
 }
-
-
+.card-img{
+  position: relative;
+}
+.old-price{
+  text-decoration-line: line-through;
+  margin: 10px 0;
+  margin-right: 10px;
+}
+.product-infor h4 {
+  text-align: center;
+}
+.sale-off{
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  z-index: 999;
+}
 .body-right{
    width: 60%;
    height: 100%;
@@ -891,7 +906,7 @@ th{
 }
 .cart-image img{
   width: 100%;
-  height: 100%;
+  height: 300px;
 }
 .product-cart{
   width: 100%;
@@ -1138,26 +1153,42 @@ th{
 }
 /* Responsive */
 
-
+.user-infor{
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
 .emp-profile{
   padding:0;
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin-top: 30px;
+  margin-bottom: 30px;
   border-radius: 0.5rem;
   background: #fff;
   font-size: 20px;
 }
+.btn-avatar-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .profile-img{
   position: relative;
   margin-bottom: 100px;
-  
-  
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.col-md-3{
+  overflow: hidden;
+}
+.customer-infor h5{
+  font-weight: 300;
+  margin-bottom: 0;
 }
 .profile-img img{
-  width: 70%;
-  height: 100%;
-  border-radius: 50%;
+  width: 100%;
+  border-radius: 6px;
+  height: 250px;
 }
 .profile-img input{
  position: absolute;
@@ -1168,13 +1199,7 @@ th{
   margin-left: 0%;
  
 }
-.profile-head h5{
-  color: #333;
-  
-}
-.profile-head h6{
-  color: #0062cc;
-}
+
 .profile-edit-btn{
   border: none;
   border-radius: 1.5rem;
@@ -1384,4 +1409,26 @@ img{
     margin-top: 7rem;
   }
 }
+.advertise .card{
+  border: 0;
+  width: 100%;
+  background-color: #000;
+  overflow: hidden;
+}
+.advertise .card .card-image{
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  opacity: 0.8;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.advertise .card .card-image:hover{
+  opacity: 1;
+  transform: scale(1.05);
+}
+.advertise .col-6, .advertise .col-md-6{
+  padding: 0px 10px;
+}
+
 

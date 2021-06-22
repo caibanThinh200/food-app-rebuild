@@ -28,7 +28,6 @@ function HomeHeader(props) {
       let description = `<h1>Request a ride now</h1><br/>
             <h4>Greater transparency for shippers and carriers to do business together.</h4>
             <button className="btn btn-primary">Book now</button>`;
-
       descrip.innerHTML = description;
     }
   };
@@ -131,7 +130,35 @@ function HomeHeader(props) {
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row advertise">
+        <div className="container">
+          <div className="row">
+          <div className="col-md-6">
+          <div className="card">
+            <img style={{height:'410px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/mccafe_desktop.jpg" alt=""/>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="row" style={{padding:'0'}}>
+            <div className="col-6">
+              <div className="card">
+                <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/hr-pc.jpg" alt=""/>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="card">
+                <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/news/_BTS_POShcm.png" alt=""/>
+              </div>
+            </div>
+            <div className="col-12" style={{padding:'10px'}}>
+              <div className="card">
+              <img style={{height:'200px'}} className="card-image" src="https://mcdonalds.vn/uploads/2018/home/home-banner-hamburger.jpg" alt=""/>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
         <div className="col-12 ">
           <div className="container part-1">
             <div className="row">

@@ -5,12 +5,15 @@ const { queryBuilder } = require("../config/databse");
 class BillService {
   static async addBillService(req, res, next) {
     try {
-      const { cart, user, note, total } = req.body;
+      const { cart, user, note, total, address, phone } = req.body;
+      console.log(req.body);
       let billInsert = {
         idBill: uuid.v4(),
-        idUser: user,
-        note: note,
-        total: total,
+        idUser: user || "",
+        address: address || "",
+        phone: phone || "",
+        note: note || "",
+        total: total || 0,
         created_at: new Date(),
       };
       await querryBuilder("Bill").insert(billInsert);
@@ -67,7 +70,7 @@ class BillService {
     try {
       let param = req.params;
 
-      let billinfo = await querryBuilder("bill")
+      let billinfo = await querryBuilder("Bill")
         .select()
         .where("idBill", param.idBill)
         .first();
@@ -79,15 +82,40 @@ class BillService {
   static async deleteBillService(req, res, next) {
     try {
       let param = req.params;
-      let data = await querryBuilder("bill")
+      let data = await querryBuilder("Bill")
         .select("idBill")
         .where("idBill", param.idBill)
         .first();
-      await querryBuilder("bill").where("idBill", data).delete();
+      await querryBuilder("Bill").where("idBill", data).delete();
       return "Bill deleted";
     } catch (e) {
       console.log(e);
     }
   }
+  static async getAllBillService(req, res, next) {
+    try {
+      let data = await querryBuilder("Bill").select();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  static async getMonthKPIService(req, res, next) {
+    try {
+      const { total, result } = req.body;
+      const insertData = {
+        id: uuid.v4(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+        result: result || 0,
+        total: total || 0,
+      };
+      await querryBuilder("KPI").insert(insertData);
+      return "KPI updated";
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
+
 module.exports = BillService;
