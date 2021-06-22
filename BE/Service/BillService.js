@@ -55,7 +55,7 @@ class BillService {
         const productInf = await querryBuilder("product")
           .where("idProduct", item.idProduct)
           .first();
-        return productInf;
+        return {...productInf, count: item.count};
       });
       const productInPromise = await Promise.all(product);
       return productInPromise;
