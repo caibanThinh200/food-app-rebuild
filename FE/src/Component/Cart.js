@@ -92,7 +92,7 @@ function Cart(props) {
   console.log(info)
   const handleOK = () => {
     if (cart.length > 0) {
-      axios.put(DEV_URL + "/Home/submit", cart).then((res) => console.log(res));
+      axios.put(API_URL + "/Home/submit", cart).then((res) => console.log(res));
       const billInsert = {
         cart: cart,
         user: info.id,

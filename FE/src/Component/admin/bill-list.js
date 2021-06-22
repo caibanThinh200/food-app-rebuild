@@ -6,7 +6,7 @@ import { Descriptions } from "antd";
 
 const BillTable = (props) => {
     const [bill, setBill] = useState([]),
-        { API_URL } = useContext(context),
+        { API_URL, DEV_URL } = useContext(context),
         { Column } = Table
     const [visible, setVisible] = useState(false)
     const [food, setFood] = useState([])
@@ -25,10 +25,12 @@ const BillTable = (props) => {
             console.log("call")
             axios.get(API_URL + "/bill/p/" + data.idBill)
                 .then(res => {
+                    console.log(res.data.data)
                     setFood(res.data.data)
                 })
         }
     }
+
     return (
         <Fragment>
             <Modal width={1000} visible={visible} footer={false} title="Bill Detail" onCancel={() => setVisible(false)}>
