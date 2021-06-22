@@ -191,6 +191,7 @@ function SignIn(props) {
                   submitLogin(e);
                   props.disable();
                 }}
+                style={{borderRadius:'5px', margin:'0 auto', marginTop:'10px'}}
                 className="bg-warning"
               >
                 Login

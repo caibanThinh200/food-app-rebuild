@@ -243,8 +243,8 @@ export const ContextProvider = (props) => {
     fetch(API_URL + "/Home")
       .then((res) => res.json())
       .then((json) => {
-        const productList = new ProductListModel(json).getListProduct().result;
-        setProduct(productList);
+        const productList = new ProductListModel(json).getListProduct();
+        setProduct(productList.result);
         setIsLoading(false);
       });
   };
@@ -460,6 +460,7 @@ export const ContextProvider = (props) => {
   const store = {
     //constant state
     API_URL,
+    DEV_URL,
     isLoading,
     setIsLoading,
     isLoadingResult,

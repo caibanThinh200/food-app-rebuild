@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { context } from "../Context/Context";
-import { Spin, Input, Result, Button } from "antd";
+import { Spin, Input, Result, Button, Tag } from "antd";
 import {
   SmileOutlined,
   RadiusUpleftOutlined,
@@ -89,6 +89,7 @@ function ProductList(props) {
                           src={API_URL + "/images/" + value.image}
                           alt="..."
                         />
+                        {value.foodAddress > 0 &&<Tag className="sale-off" color="#f50" style={{padding:'5px 10px'}}> Sale {value.foodAddress} %</Tag>}
                       </div>
                       <div className="card-body">
                         <div>
@@ -102,16 +103,19 @@ function ProductList(props) {
                         </div>
                       </div>
                     </div>
-                    <div className="text-center">
+                    <div className="product-infor">
                       <h4 className="h5 mb-2">
                         <a href="#" className="text-secondary">
                           {value.nameFood}
                         </a>
                       </h4>
-                      <h7 className="text-secondary h6 mb-2">
-                        {value.foodAdress}
-                      </h7>
-                      <h5 className="mb-0 text-primary">{ new Intl.NumberFormat().format(value.price)} VND</h5>
+                      {value.foodAddress == 0?
+                        <div className="mt-3 d-flex justify-content-center"><h5 className="mb-0 text-primary">{ new Intl.NumberFormat().format(value.price)} VND</h5></div>
+                      :<div className="d-flex mt-3">
+                        <p className="old-price">{new Intl.NumberFormat().format(value.price)}</p>
+                        <h5 className="mb-0 text-danger">{new Intl.NumberFormat().format(value.price*(100 - value.foodAddress)/100)} VND</h5>
+                      </div>
+                    }
                     </div>
                   </div>
                   </div>
@@ -144,6 +148,7 @@ function ProductList(props) {
                           src={API_URL + "/images/" + value.image}
                           alt="..."
                         />
+                        {value.foodAddress > 0 &&<Tag className="sale-off" color="#f50" style={{padding:'5px 10px'}}> Sale {value.foodAddress} %</Tag>}
                       </div>
                       <div className="card-body">
                         <div>
@@ -157,16 +162,19 @@ function ProductList(props) {
                         </div>
                       </div>
                     </div>
-                    <div className="text-center">
+                    <div className="product-infor">
                       <h4 className="h5 mb-2">
                         <a href="#" className="text-secondary">
                           {value.nameFood}
                         </a>
                       </h4>
-                      <h7 className="text-secondary h6 mb-2">
-                        {value.foodAdress}
-                      </h7>
-
+                      {value.foodAddress == 0?
+                        <div className="mt-3 d-flex justify-content-center"><h5 className="mb-0 text-primary">{ new Intl.NumberFormat().format(value.price)} VND</h5></div>
+                      :<div className="d-flex mt-3">
+                        <p className="old-price">{new Intl.NumberFormat().format(value.price)}</p>
+                        <h5 className="mb-0 text-danger">{new Intl.NumberFormat().format(value.price*(100 - value.foodAddress)/100)} VND</h5>
+                      </div>
+                    }
                       <h5 className="mb-0 text-primary">{new Intl.NumberFormat().format(value.price)} VND</h5>
                     </div>
                   </div>

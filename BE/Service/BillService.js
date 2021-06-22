@@ -6,7 +6,6 @@ class BillService {
   static async addBillService(req, res, next) {
     try {
       const { cart, user, note, total, address, phone } = req.body;
-      console.log(req.body);
       let billInsert = {
         idBill: uuid.v4(),
         idUser: user || "",
@@ -33,7 +32,7 @@ class BillService {
   }
   static async showListBillService(req, res, next) {
     try {
-      let billId = req.params.idBill;
+      let billId = req.params.id;
 
       let billData = await querryBuilder("Bill")
         .where("idBill", billId)

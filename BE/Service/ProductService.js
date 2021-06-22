@@ -147,7 +147,7 @@ class ProductService {
         let product = JSON.parse(productStringlify);
         await querryBuilder("product")
           .where("idProduct", item.idProduct)
-          .update("saled", product.count + item.count);
+          .update("saled", product.saled + item.count);
       });
 
       return "increase success";

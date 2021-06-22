@@ -2,7 +2,7 @@ import { Button, Layout, Modal, Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../Context/Context";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -82,13 +82,15 @@ const Profile = () => {
     setModal(false);
     setImageURL("")
   };
+  useEffect(()=>{
 
+  },[localStorage.getItem("token")])
   useEffect(() => {
     getUserInfoByParam();
   }, [JSON.stringify(user)]);
-
+  if(localStorage.getItem("token"))
   return (
-    <div className=" emp-profile">
+    <div className="container emp-profile">
       {id ? (
         user.map(
           ({
@@ -103,190 +105,100 @@ const Profile = () => {
             Created_at,
             avatar,
           }) => (
-            <form style={{ marginLeft: "10%" }} key={UserId} method="post">
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="profile-head">
-                    <div className="profile-head profile-title ">
+              <form className="container-fluid" key={UserId} method="post">
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="profile-head">
                       <div
-                        style={{ width: "40%", height: "200px" }}
-                        className="profile-img floatLeft"
+                        className="profile-img"
                       >
                         <img
-                          style={{ width: "100%", height: "100%" }}
-                          src={ API_URL + "/images/" + avatar}
+                          src={API_URL + "/images/" + avatar}
                         />
+                        <div className="btn-avatar-container">
+                        <h3 style={{margin:'20px 0'}}>{Fullname}</h3>
                         <Button
-                          style={{ margin: "30px 80px" }}
                           onClick={() => {
                             showModal();
                           }}
-                          type="primary"
+                          type="default"
                         >
                           Change photo
                         </Button>
+                        </div>
                         <Modal
-                          style={{ marginTop: "300px" }}
                           visible={modal}
                           onOk={handleOk}
                           onCancel={handleCancel}
                         >
-                          <input type="file" onChange={(e) => setImageURL(e.target.files[0])}/>
+                          <input type="file" onChange={(e) => setImageURL(e.target.files[0])} />
                           {imageURL && imageURL.name}
                         </Modal>
                       </div>
-
-                      <h5>{Fullname}</h5>
                     </div>
-                    <div className="clear-both"></div>
-                    <ul className=" nav-tabs" id="myTab" role="tablist">
-                      <li className="nav-item floatLeft">
-                        <a
-                          className="nav-link active"
-                          id="home-tab"
-                          data-toggle="tab"
-                          href="#home"
-                          role="tab"
-                          aria-controls="home"
-                          aria-selected="true"
-                        >
-                          About
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
-                          id="profile-tab"
-                          data-toggle="tab"
-                          href="#profile"
-                          role="tab"
-                          aria-controls="profile"
-                          aria-selected="false"
-                        >
-                          Timeline
-                        </a>
-                      </li>
-                    </ul>
                   </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-8">
-                  <div className="tab-content profile-tab" id="myTabContent">
-                    <div
-                      className="tab-pane fade show active"
-                      id="home"
-                      role="tabpanel"
-                      aria-labelledby="home-tab"
-                    >
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>User Id</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>{UserId}</p>
-                        </div>
+                  <div className="col-md-8 bg-light">
+                    <div className="customer-infor p-2">
+                      <h4>Customer Information</h4>
+                      <h5 id="email"><span className="text-primary">({Gmail})</span></h5>
+                      <div className="alert alert-secondary mt-3" role="alert">
+                          Create at: {Created_at}
                       </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Name</label>
+                      <div>
+                        <div className="user-infor">
+                          <div className="row">
+                            <div className="col-3">
+                              <h5>Fullname:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{Fullname}</h5>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-md-6">
-                          <p>{Fullname}</p>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Phone number:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>0{phoneNum}</h5>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Email</label>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Address:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{UserAddress}</h5>
+                            </div>
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <p>{Gmail}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Phone</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>{phoneNum}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-4">
-                          <label>Profession</label>
-                        </div>
-                        <div className="col-md-4">
-                          <p>Web Developer and Designer</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="profile"
-                      role="tabpanel"
-                      aria-labelledby="profile-tab"
-                    >
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Experience</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Hourly Rate</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>10$/hr</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Total Projects</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>230</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>English Level</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Availability</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>6 months</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <label>Your Bio</label>
-                          <br />
-                          <p>Your detail description</p>
+                        <div className="user-infor">
+                        <div className="row">
+                            <div className="col-3">
+                              <h5>Birthdate:</h5>
+                            </div>
+                            <div className="col-9">
+                                <h5>{Birth}</h5>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          )
+              </form>
+            )
         )
       ) : (
-        <div>
-          <h1>You have logout , please sign in</h1>
-        </div>
-      )}
+          <div>
+            <h1>You have logout , please sign in</h1>
+          </div>
+        )}
     </div>
   );
+  else return <Redirect to="/"/>
 };
 export default Profile;
