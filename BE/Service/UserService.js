@@ -82,7 +82,7 @@ class UserService {
               gmail: user.Gmail,
             },
             JWT_SECRET_KEY,
-            { expiresIn: 60 * 60 * 8 }
+            { expiresIn: 60 * 60 * 72 }
           );
 
           return { token: token };
